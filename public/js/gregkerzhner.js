@@ -10,29 +10,20 @@ $(document).ready(function(){
 
 		},
 		render: function(){
-			$(this.el).html(this.template(this.model.toJSON()));
-			for(var i = 0; i<16;i++){
-				var square = function(ctx) {
-			    	ctx.fillStyle = "red";
-			    	ctx.fillRect(Math.floor((Math.random()*300)+1), Math.floor((Math.random()*300)+1), 80, 80);
-				}
-				$g('introCanvas').size(400, 600).add(square);
+			//$(this.el).html(this.template(this.model.toJSON()));
+			var canvas = new fabric.Canvas('introCanvas', { width: 900, height: 600 });
+			for(var i = 0; i<200; i++){
+				var rect = new fabric.Rect({
+			  	left: Math.floor(Math.random()*600),
+			  	top: Math.floor(Math.random()*900),
+			  	fill: 'red',
+			  	width: 20,
+			  	height: 20
+				});
+				canvas.add(rect);
+      	
 			}
-
-			$g('introCanvas').size(400, 600).add({
-			    theta: 0, 
-			    draw: function(ctx) {
-			        ctx.save();
-			        ctx.translate(50, 50);
-			        ctx.rotate(this.theta);
-			        ctx.fillStyle = "#ada";
-			        ctx.fillRect(-32, -32, 64, 64);
-			        ctx.restore();
-			        this.theta += Math.PI / 120;
-			    }
-			}).play(16);
-
-            return this;
+			return this;
 		}
 	});
 	
@@ -43,7 +34,7 @@ $(document).ready(function(){
 
 	initialize: function() {
 		intro = new Intro();
-	    this.introView = new IntroView({model: intro});		
+	  this.introView = new IntroView({model: intro});		
 	 },
 	 home: function(){
 	 	$("canvas").html(this.introView.render().el)
