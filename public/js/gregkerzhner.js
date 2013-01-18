@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	//window.coordinates = [{100,100}, {200,200}]
+	window.coordinates = [[300,100], [295,120],[290,140],[287,160],[284,180],[283,200],[282,220],[283,240],[284,260],[290,280],[295,300],[305,315],[315,320],[325,322],
+	[335,320],[340,315],[283,200],[283,200]];
 	fabric.RotatingSquare = fabric.util.createClass(fabric.Rect, {
 	    type: 'RotatingSquare',
 
@@ -12,12 +13,8 @@ $(document).ready(function(){
 	        return fabric.util.object.extend(this.callSuper('toObject'), { name: this.name });
 	    },
 
-	    rotated: function(){
-	
-	    	this.angle +=10;
-	    	if(this.angle>360){
-	    		this.angle = 0;
-	    	}
+	    proximize: function(){
+	    	this.top +=10;
 	    }
 
 	});
@@ -32,13 +29,14 @@ $(document).ready(function(){
 			this.template = _.template($("#intro-template").html());
 
 		},
-		render: function(){
-			//$(this.el).html(this.template(this.model.toJSON()));
-			var canvas = new fabric.Canvas('introCanvas', { width: 900, height: 600 });
-			for(var i = 0; i<200; i++){
+		render: function(){;
+			var canvas = new fabric.Canvas('introCanvas', { width: 800, height: 500 });
+			for(var i = 0; i<window.coordinates.length; i++){
 				var rect = new fabric.RotatingSquare({
-			  	left: Math.floor(Math.random()*600),
-			  	top: Math.floor(Math.random()*900),
+			  	//left: Math.floor(Math.random()*600),
+			  	//top: Math.floor(Math.random()*900),
+			  	left: window.coordinates[i][0],
+			  	top: window.coordinates[i][1],
 			  	fill: 'red',
 			  	width: 20,
 			  	height: 20,
@@ -51,9 +49,7 @@ $(document).ready(function(){
 
 			 canvas.forEachObject(
 			 	function(obj){ 
-			 		obj.rotate(obj.angle+10);
-			 		//obj.angle = 180;
-			 		console.log(obj.angle)
+			 		obj.rotate(obj.angle+10);				 		
 			 	}
 			  );
 			  canvas.renderAll();
