@@ -71,7 +71,7 @@ $(document).ready(function(){
 			  	top: Math.floor(Math.random()*900),
 			  	finalLeft: window.coordinates[i][0],
 			  	finalTop: window.coordinates[i][1],
-			  	fill: 'red',
+			  	fill: 'green',
 			  	width: 20,
 			  	height: 20,
 			  	angle: 45	
@@ -85,11 +85,9 @@ $(document).ready(function(){
 			 canvas.forEachObject(
 			 	function(obj){ 			 	
 			 		if(animationCounter>100 && animationCounter<200){
-			 			obj.lightTheFuse(5);
-			 			//obj.goAway(100);
+			 			obj.lightTheFuse(5);			
 			 		}	
 			 		else if(animationCounter>200 && animationCounter<400){
-			 			obj.rotate(obj.angle+10);			
 			 	 		obj.proximize();
 			 	 	} else if(animationCounter>400){
 			 	 		obj.goAway(25);
