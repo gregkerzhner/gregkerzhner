@@ -52,7 +52,7 @@ $(document).ready(function(){
 	    }
 
 	});
-
+	
 	window.Intro = Backbone.Model.extend({});
 	window.IntroView = Backbone.View.extend({
 		template: _.template($("#intro-template").html()),
@@ -63,12 +63,13 @@ $(document).ready(function(){
 			this.template = _.template($("#intro-template").html());
 
 		},
-		render: function(){;
+		render: function(){
+			var that = this;
 			var canvas = new fabric.Canvas('introCanvas', { width: 800, height: 500 });
 			for(var i = 0; i<window.coordinates.length; i++){
 				var rect = new fabric.RotatingSquare({
-			  	left: Math.floor(Math.random()*600),
-			  	top: Math.floor(Math.random()*900),
+			  	left: Math.floor(Math.random()*900),
+			  	top: Math.floor(Math.random()*600),
 			  	finalLeft: window.coordinates[i][0],
 			  	finalTop: window.coordinates[i][1],
 			  	fill: '#59B249',
@@ -95,26 +96,65 @@ $(document).ready(function(){
 			 	}
 			  );
 			  canvas.renderAll();
-			  if(animationCounter<700){
+			  if(animationCounter<400){
+			
 			  	setTimeout(animate, 10);
 				}
+			  else{
+			  	that.finish();
+			  }
 			}, 10);
+			return this;
+		},
+
+		finish: function(){
+			
+			window.blog.trigger("change");
+			this.remove();
+		}
+	});
+	window.Blog = Backbone.Model.extend({
+
+	});
+	window.Post = Backbone.Model.extend({});
+	window.Posts = Backbone.Collection.extend({
+		model: Post 
+	});
+	window.posts = new Posts();
+	window.BlogView = Backbone.View.extend({
+		tagName: "div",
+		className: "blog",
+		initialize: function(){
+			_.bindAll(this, 'render');
+			this.model.bind('change', this.render);
+			this.template = _.template($("#blog-template").html());
+		
+		},
+		render: function(){
+			$("#container").empty();
+			$("#container").html(this.template({}));
 			return this;
 		}
 	});
-	
+
 	window.Gregkerzhner = Backbone.Router.extend({
 	routes: {
 	    '': 'home',	   
 	},
 
 	initialize: function() {
-		intro = new Intro();
-	  this.introView = new IntroView({model: intro});		
+	  intro = new Intro();
+	  this.introView = new IntroView({model: intro});
+	  window.blog = new Blog();
+	  this.blogView = new BlogView({model: window.blog})
+	  
+
 	 },
 	 home: function(){
-	 	$("canvas").html(this.introView.render().el)
-
+	 	$("canvas").html(this.introView.render().el);
+	 	// $("#container").html(this.blogView.render().el);
+	 	 $(".canvas-container").css("margin", "0 auto");
+	 	
 	 }}
 	 );	
 	window.App = new Gregkerzhner();
