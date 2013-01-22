@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 
 	];
-	window.navMenuSeed = [{title: "home"},{title: "blog"}];
+	window.navMenuSeed = [{id: 1, title: "home"},{id: 2,title: "blog"}];
 	fabric.RotatingSquare = fabric.util.createClass(fabric.Rect, {
 	    type: 'RotatingSquare',
 
@@ -115,18 +115,20 @@ $(document).ready(function(){
 		}
 	});
 	window.NavMenuItem = Backbone.Model.extend({
-
+		setCurrent: function(){
+			this.set({current: true})
+		}
 	});
 	window.NavMenuItems = Backbone.Collection.extend({
 		model: NavMenuItem
 	});
-	var menu1 = new NavMenuItem({
-		title: "home"
-
-	});
 	window.NavMenuView = Backbone.View.extend({
 		el: "#container",
 		className: "nav-menu",
+		events: {
+      'click .nav-menu-link': 'navigate',
+                
+    },
 		initialize: function(){
 			_.bindAll(this, 'render');	
 			this.template = _.template($("#menu-template").html());
@@ -138,8 +140,13 @@ $(document).ready(function(){
 			this.render();
 		},
 		render: function(){
-			$(this.el).append(this.template({stuff: this.collection.toJSON}));
+			$(this.el).append(this.template({data: this.collection.models}));
 			return this;
+		},
+		navigate: function(e){
+			var id = $(e.currentTarget).data("id");
+			var item = this.collection.get(id);
+			item.setCurrent();
 		}
 	});
 	window.Gregkerzhner = Backbone.Router.extend({

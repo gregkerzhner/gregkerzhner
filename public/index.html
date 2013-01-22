@@ -27,9 +27,8 @@
     </script>
     <script type="text/template" id="menu-template">
       <div class = "nav-menu">
-        <li><%= stuff %></li>
-        <% _.each(stuff, function(menuItem) { %>
-          <li><%= menuItem.title %></li>
+        <% _.each(data, function(menuItem) { %>
+          <div class = "nav-menu-link" data-id=<%= menuItem.attributes.id %>><%= menuItem.attributes.title %></div>
         <% }); %>      
       </div>
     </script>
