@@ -71,7 +71,7 @@ $(document).ready(function(){
 			  	top: Math.floor(Math.random()*900),
 			  	finalLeft: window.coordinates[i][0],
 			  	finalTop: window.coordinates[i][1],
-			  	fill: 'green',
+			  	fill: '#59B249',
 			  	width: 20,
 			  	height: 20,
 			  	angle: 45	
@@ -84,12 +84,12 @@ $(document).ready(function(){
 			 animationCounter++;
 			 canvas.forEachObject(
 			 	function(obj){ 			 	
-			 		if(animationCounter>100 && animationCounter<200){
+			 		if(animationCounter>100 && animationCounter<120){
 			 			obj.lightTheFuse(5);			
 			 		}	
-			 		else if(animationCounter>200 && animationCounter<400){
+			 		else if(animationCounter>120 && animationCounter<300){
 			 	 		obj.proximize();
-			 	 	} else if(animationCounter>400){
+			 	 	} else if(animationCounter>300){
 			 	 		obj.goAway(25);
 			 	 	}
 			 	}
