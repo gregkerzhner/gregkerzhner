@@ -8,6 +8,7 @@ $(document).ready(function(){
 
 
 	];
+	window.navMenuSeed = [{title: "home"},{title: "blog"}];
 	fabric.RotatingSquare = fabric.util.createClass(fabric.Rect, {
 	    type: 'RotatingSquare',
 
@@ -52,7 +53,7 @@ $(document).ready(function(){
 	    }
 
 	});
-	
+	window.navMenuView;
 	window.Intro = Backbone.Model.extend({});
 	window.IntroView = Backbone.View.extend({
 		template: _.template($("#intro-template").html()),
@@ -96,7 +97,7 @@ $(document).ready(function(){
 			 	}
 			  );
 			  canvas.renderAll();
-			  if(animationCounter<400){
+			  if(animationCounter<0){
 			
 			  	setTimeout(animate, 10);
 				}
@@ -108,35 +109,39 @@ $(document).ready(function(){
 		},
 
 		finish: function(){
+			$("#container").empty();
+			window.navMenuView = new NavMenuView();
 			
-			window.blog.trigger("change");
-			this.remove();
 		}
 	});
-	window.Blog = Backbone.Model.extend({
+	window.NavMenuItem = Backbone.Model.extend({
 
 	});
-	window.Post = Backbone.Model.extend({});
-	window.Posts = Backbone.Collection.extend({
-		model: Post 
+	window.NavMenuItems = Backbone.Collection.extend({
+		model: NavMenuItem
 	});
-	window.posts = new Posts();
-	window.BlogView = Backbone.View.extend({
-		tagName: "div",
-		className: "blog",
+	var menu1 = new NavMenuItem({
+		title: "home"
+
+	});
+	window.NavMenuView = Backbone.View.extend({
+		el: "#container",
+		className: "nav-menu",
 		initialize: function(){
-			_.bindAll(this, 'render');
-			this.model.bind('change', this.render);
-			this.template = _.template($("#blog-template").html());
-		
+			_.bindAll(this, 'render');	
+			this.template = _.template($("#menu-template").html());
+			this.collection = new NavMenuItems();
+			for (var i = 0; i<window.navMenuSeed.length; i++){
+				var navMenuItem = new NavMenuItem(window.navMenuSeed[i]);
+				this.collection.add(navMenuItem);
+			}
+			this.render();
 		},
 		render: function(){
-			$("#container").empty();
-			$("#container").html(this.template({}));
+			$(this.el).append(this.template({stuff: this.collection.toJSON}));
 			return this;
 		}
 	});
-
 	window.Gregkerzhner = Backbone.Router.extend({
 	routes: {
 	    '': 'home',	   
@@ -145,16 +150,10 @@ $(document).ready(function(){
 	initialize: function() {
 	  intro = new Intro();
 	  this.introView = new IntroView({model: intro});
-	  window.blog = new Blog();
-	  this.blogView = new BlogView({model: window.blog})
-	  
-
 	 },
 	 home: function(){
 	 	$("canvas").html(this.introView.render().el);
-	 	// $("#container").html(this.blogView.render().el);
-	 	 $(".canvas-container").css("margin", "0 auto");
-	 	
+    	$(".canvas-container").css("margin", "0 auto");	 	
 	 }}
 	 );	
 	window.App = new Gregkerzhner();

@@ -10,7 +10,8 @@
 
     <title>gregkerzhner</title>
 
-    <link rel="stylesheet" href="style/gregkerzhner.css">
+   
+    <link rel="stylesheet" href="style/gregkerzhner.css" media="screen, projection">
 
     <script src="js/vendor/modernizr-1.6.min.js"></script>
     <script src="js/vendor/jquery.js"></script>
@@ -23,6 +24,14 @@
     </script>
     <script type="text/template" id="intro-template">
       
+    </script>
+    <script type="text/template" id="menu-template">
+      <div class = "nav-menu">
+        <li><%= stuff %></li>
+        <% _.each(stuff, function(menuItem) { %>
+          <li><%= menuItem.title %></li>
+        <% }); %>      
+      </div>
     </script>
   </head>
 
