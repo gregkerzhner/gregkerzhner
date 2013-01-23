@@ -20,7 +20,17 @@
     <script src="js/vendor/fabric.js"></script>
     <script src="js/gregkerzhner.js"></script>
     <script type="text/template" id="blog-template">
-      stuff
+      <div class = "blog-container"> 
+        <div class = "blog-nav">
+          <% _.each(blogs, function(blog) { %>
+          <span class = "blog-nav-link" data-id=<%= blog.attributes.id %>><%= blog.attributes.title %></span>
+          <% }); %>  
+        </div>
+
+
+
+      </div>
+     
     </script>
     <script type="text/template" id="intro-template">
       
@@ -28,7 +38,7 @@
     <script type="text/template" id="menu-template">
       <div class = "nav-menu">
         <% _.each(data, function(menuItem) { %>
-          <div class = "nav-menu-link" data-id=<%= menuItem.attributes.id %>><%= menuItem.attributes.title %></div>
+          <span class = "nav-menu-link" data-id=<%= menuItem.attributes.id %>><%= menuItem.attributes.title %></span>
         <% }); %>      
       </div>
     </script>

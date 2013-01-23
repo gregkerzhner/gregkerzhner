@@ -2,6 +2,8 @@ body{
 	background-color: #182B29;
 	height: 100%;
 	width: 100%;
+	font-family: "arial";
+	color: white;
 }
 #container{
 	width: 100%;
@@ -16,14 +18,20 @@ body{
 .nav-menu{
 	width: 100%;
 	height: 30%;
-	background-color: #051B1A;
+	
 }
 
 .nav-menu-link{
 	font-size: 30px;
-	color: white;
+	
 }
-.nav-menu-link:hover{
+span:hover{
 	font-weight: bold;
 	cursor: pointer;
+}
+.blog-nav{
+	width: 10%;
+}
+.blog-nav-link{
+	float: left;
 }

@@ -1,3 +1,22 @@
+window.Blog = Backbone.Model.extend({
+	setCurrent: function(){
+		this.set({current: true})	
+	}
+});
+window.Blogs = Backbone.Collection.extend({
+	model: Blog,
+	url: "/blogs"
+});
+window.blogs = new Blogs();
+blogs.fetch({
+	success: function(m,r){
+          console.log("success");
+          console.log(r); // => 2 (collection have been populated)
+    },
+	error: function(m,r){
+	console.log("error");
+    console.log(r.responseText);
+}});
 $(document).ready(function(){
 	window.coordinates = [[310,95],[320,93],[300,100], [295,120],[290,140],[287,160],[284,180],[283,200],[282,220],[283,240],[284,260],[290,280],[295,300],[305,315],[315,320],[325,322],
 	[335,320],[340,315],[350,310],[360,300],[360,290],[355,280],[350,277],[340,277],
@@ -111,12 +130,39 @@ $(document).ready(function(){
 		finish: function(){
 			$("#container").empty();
 			window.navMenuView = new NavMenuView();
+			$(this.el).removeData().unbind();
 			
 		}
 	});
+	window.BlogView = Backbone.View.extend({
+		el: "#container",
+		collection: window.blogs,
+		events: {
+      		'click .blog-nav-link': 'navigate',
+                
+    	},
+		initialize: function(){
+			_.bindAll(this, 'render');
+			this.template = _.template($("#blog-template").html());
+			this.render();
+		},
+		render: function(){
+			alert("rendering");
+			$(this.el).append(this.template({blogs: this.collection.models}));
+			return this;
+		},
+		navigate: function(e){
+			var id = $(e.currentTarget).data("id");
+			var item = this.collection.get(id);
+			item.setCurrent();
+		}
+	})
 	window.NavMenuItem = Backbone.Model.extend({
 		setCurrent: function(){
 			this.set({current: true})
+			if(this.get("title")==="blog"){
+				new BlogView();
+			}
 		}
 	});
 	window.NavMenuItems = Backbone.Collection.extend({
@@ -128,7 +174,7 @@ $(document).ready(function(){
 		events: {
       'click .nav-menu-link': 'navigate',
                 
-    },
+    	},
 		initialize: function(){
 			_.bindAll(this, 'render');	
 			this.template = _.template($("#menu-template").html());
