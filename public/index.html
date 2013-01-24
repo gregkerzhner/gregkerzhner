@@ -26,9 +26,10 @@
           <span class = "blog-nav-link" data-id=<%= blog.attributes.id %>><%= blog.attributes.title %></span>
           <% }); %>  
         </div>
-
-
-
+        <div class = "blog-main">
+          <div class = "blog-title"><%= currentModel.attributes.title %></div>
+          <div class = "blog-body"> <%= currentModel.attributes.body %></div>
+        </div>
       </div>
      
     </script>

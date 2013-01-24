@@ -1,11 +1,13 @@
 window.Blog = Backbone.Model.extend({
 	setCurrent: function(){
-		this.set({current: true})	
+		this.set({current: true});	
 	}
+
 });
 window.Blogs = Backbone.Collection.extend({
 	model: Blog,
-	url: "/blogs"
+	url: "/blogs",
+	current: 1
 });
 window.blogs = new Blogs();
 blogs.fetch({
@@ -129,6 +131,7 @@ $(document).ready(function(){
 
 		finish: function(){
 			$("#container").empty();
+			$("#container").css("height","100%");
 			window.navMenuView = new NavMenuView();
 			$(this.el).removeData().unbind();
 			
@@ -137,24 +140,32 @@ $(document).ready(function(){
 	window.BlogView = Backbone.View.extend({
 		el: "#container",
 		collection: window.blogs,
+		model: window.blogs.where({current: true}),
 		events: {
       		'click .blog-nav-link': 'navigate',
                 
     	},
 		initialize: function(){
 			_.bindAll(this, 'render');
+			this.collection.bind('change', this.changeBlogs);
 			this.template = _.template($("#blog-template").html());
 			this.render();
 		},
 		render: function(){
-			alert("rendering");
-			$(this.el).append(this.template({blogs: this.collection.models}));
+
+		    $(".blog-container").remove();
+		    var currentId = this.collection.current;
+		    var currentModel = this.collection.get(currentId);
+			$(this.el).append(this.template({blogs: this.collection.models, currentModel: currentModel}));
 			return this;
 		},
 		navigate: function(e){
 			var id = $(e.currentTarget).data("id");
 			var item = this.collection.get(id);
-			item.setCurrent();
+			if(this.collection.current!==id){
+				this.collection.current = id;
+				this.render();
+			}
 		}
 	})
 	window.NavMenuItem = Backbone.Model.extend({
