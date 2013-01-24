@@ -94,7 +94,7 @@ $(document).ready(function(){
 			  	top: Math.floor(Math.random()*600),
 			  	finalLeft: window.coordinates[i][0],
 			  	finalTop: window.coordinates[i][1],
-			  	fill: '#59B249',
+			  	fill: '#F6F6F6',
 			  	width: 20,
 			  	height: 20,
 			  	angle: 45	
@@ -138,7 +138,7 @@ $(document).ready(function(){
 		}
 	});
 	window.BlogView = Backbone.View.extend({
-		el: "#container",
+		el: ".blog-container",
 		collection: window.blogs,
 		model: window.blogs.where({current: true}),
 		events: {
@@ -156,7 +156,7 @@ $(document).ready(function(){
 		    $(".blog-container").remove();
 		    var currentId = this.collection.current;
 		    var currentModel = this.collection.get(currentId);
-			$(this.el).append(this.template({blogs: this.collection.models, currentModel: currentModel}));
+			$("#container").append(this.template({blogs: this.collection.models, currentModel: currentModel}));
 			return this;
 		},
 		navigate: function(e){
@@ -168,11 +168,32 @@ $(document).ready(function(){
 			}
 		}
 	})
+
+	window.HomeView = Backbone.View.extend({
+		el: ".home-container",
+		initialize: function(){
+			_.bindAll(this, 'render');
+			this.template = _.template($("#home-template").html());
+			this.render();
+		},
+		render: function(){
+		  $(".home-container").remove();
+			$("#container").append(this.template());
+			return this;
+		}
+	});
 	window.NavMenuItem = Backbone.Model.extend({
 		setCurrent: function(){
+			if(window.currentPage){
+				window.currentPage.remove(); 
+				//$(window.currentPage.el).remove();
+			}
 			this.set({current: true})
 			if(this.get("title")==="blog"){
-				new BlogView();
+				window.currentPage = new BlogView();
+			}
+			else{
+				window.currentPage = new HomeView();
 			}
 		}
 	});

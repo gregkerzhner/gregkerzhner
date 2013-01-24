@@ -20,7 +20,7 @@
     <script src="js/vendor/fabric.js"></script>
     <script src="js/gregkerzhner.js"></script>
     <script type="text/template" id="blog-template">
-      <div class = "blog-container"> 
+      <div class = "blog-container" id="blog-container"> 
         <div class = "blog-nav">
           <% _.each(blogs, function(blog) { %>
           <span class = "blog-nav-link" data-id=<%= blog.attributes.id %>><%= blog.attributes.title %></span>
@@ -33,6 +33,13 @@
       </div>
      
     </script>
+    <script type="text/template" id="home-template">
+      <div class = "home-container"> 
+        Take me home!
+      </div>
+     
+    </script>
+
     <script type="text/template" id="intro-template">
       
     </script>
