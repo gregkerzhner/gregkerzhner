@@ -53,6 +53,7 @@ span:hover{
 }
 .blog-nav-link{
 	float: left;
+	width: 90%;
 	margin: 5px 0px;
 }
 .blog-main{
@@ -69,4 +70,29 @@ span:hover{
 	width: 80%;
 	margin: 20px;
 	border: 3px solid white;
+}
+.home-container{
+	margin-top: 10px;
+}
+.about-me{
+	width: 50%;
+	float: left;
+}
+.about-me-block{
+	margin: 20px;
+	width: 90%;
+	float: left;
+}
+.home-container img{
+	width: 40%;
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 3px solid white;
+}
+a{
+	color: #C76245;
+}
+.rich{
+	color: #C76245;
 }

@@ -130,21 +130,22 @@ $(document).ready(function(){
 		},
 
 		finish: function(){
-			$("#container").empty();
+			$("#introCanvas").remove();
+			$(".canvas-container").remove();
 			$("#container").css("height","100%");
 			window.navMenuView = new NavMenuView();
 			$(this.el).removeData().unbind();
+
 			
 		}
 	});
 	window.BlogView = Backbone.View.extend({
-		el: ".blog-container",
+		el: "#main",
 		collection: window.blogs,
 		model: window.blogs.where({current: true}),
 		events: {
-      		'click .blog-nav-link': 'navigate',
-                
-    	},
+      		'click .blog-nav-link': 'navigate'
+    },
 		initialize: function(){
 			_.bindAll(this, 'render');
 			this.collection.bind('change', this.changeBlogs);
@@ -152,14 +153,14 @@ $(document).ready(function(){
 			this.render();
 		},
 		render: function(){
-
-		    $(".blog-container").remove();
-		    var currentId = this.collection.current;
-		    var currentModel = this.collection.get(currentId);
-			$("#container").append(this.template({blogs: this.collection.models, currentModel: currentModel}));
+			$(this.el).empty();
+		  var currentId = this.collection.current;
+		  var currentModel = this.collection.get(currentId);
+			$(this.el).append(this.template({blogs: this.collection.models, currentModel: currentModel}));
 			return this;
 		},
 		navigate: function(e){
+			console.log("changing blogs");
 			var id = $(e.currentTarget).data("id");
 			var item = this.collection.get(id);
 			if(this.collection.current!==id){
@@ -170,30 +171,26 @@ $(document).ready(function(){
 	})
 
 	window.HomeView = Backbone.View.extend({
-		el: ".home-container",
+		el: "#main",
 		initialize: function(){
 			_.bindAll(this, 'render');
 			this.template = _.template($("#home-template").html());
 			this.render();
 		},
 		render: function(){
-		  $(".home-container").remove();
-			$("#container").append(this.template());
+		  $(this.el).empty();
+			$(this.el).append(this.template());
 			return this;
 		}
 	});
 	window.NavMenuItem = Backbone.Model.extend({
 		setCurrent: function(){
-			if(window.currentPage){
-				window.currentPage.remove(); 
-				//$(window.currentPage.el).remove();
-			}
 			this.set({current: true})
 			if(this.get("title")==="blog"){
-				window.currentPage = new BlogView();
+			  new BlogView();
 			}
 			else{
-				window.currentPage = new HomeView();
+				new HomeView();
 			}
 		}
 	});
@@ -201,7 +198,7 @@ $(document).ready(function(){
 		model: NavMenuItem
 	});
 	window.NavMenuView = Backbone.View.extend({
-		el: "#container",
+		el: "#top-nav",
 		className: "nav-menu",
 		events: {
       'click .nav-menu-link': 'navigate',
@@ -213,15 +210,21 @@ $(document).ready(function(){
 			this.collection = new NavMenuItems();
 			for (var i = 0; i<window.navMenuSeed.length; i++){
 				var navMenuItem = new NavMenuItem(window.navMenuSeed[i]);
+				if(i == 0){
+					navMenuItem.setCurrent();					
+				}
 				this.collection.add(navMenuItem);
 			}
 			this.render();
+			$($(".nav-menu-link")[0]).addClass("rich");
 		},
 		render: function(){
 			$(this.el).append(this.template({data: this.collection.models}));
 			return this;
 		},
 		navigate: function(e){
+			$(".nav-menu-link").removeClass("rich");
+			$(e.currentTarget).addClass("rich");
 			var id = $(e.currentTarget).data("id");
 			var item = this.collection.get(id);
 			item.setCurrent();
