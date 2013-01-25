@@ -118,7 +118,7 @@ $(document).ready(function(){
 			 	}
 			  );
 			  canvas.renderAll();
-			  if(animationCounter<0){
+			  if(animationCounter<350){
 			
 			  	setTimeout(animate, 10);
 				}
