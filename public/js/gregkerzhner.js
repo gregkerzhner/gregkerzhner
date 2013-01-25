@@ -1,4 +1,4 @@
-window.Blog = Backbone.Model.extend({
+ window.Blog = Backbone.Model.extend({
 	setCurrent: function(){
 		this.set({current: true});	
 	}
@@ -107,18 +107,18 @@ $(document).ready(function(){
 			 animationCounter++;
 			 canvas.forEachObject(
 			 	function(obj){ 			 	
-			 		if(animationCounter>100 && animationCounter<120){
+			 		if(animationCounter>50 && animationCounter<100){
 			 			obj.lightTheFuse(5);			
 			 		}	
-			 		else if(animationCounter>120 && animationCounter<300){
+			 		else if(animationCounter>100 && animationCounter<200){
 			 	 		obj.proximize();
-			 	 	} else if(animationCounter>300){
+			 	 	} else if(animationCounter>250){
 			 	 		obj.goAway(25);
 			 	 	}
 			 	}
 			  );
 			  canvas.renderAll();
-			  if(animationCounter<350){
+			  if(animationCounter<300){
 			
 			  	setTimeout(animate, 10);
 				}
