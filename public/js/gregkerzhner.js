@@ -159,11 +159,12 @@ $(document).ready(function(){
 			return this;
 		},
 		navigate: function(e){
-			console.log("changing blogs");
 			var id = $(e.currentTarget).data("id");
 			var item = this.collection.get(id);
 			if(this.collection.where({current: true})[0] != item){
+				$(".blog-nav-link").removeClass("rich");
 				this.collection.each(function(model){model.set({current: false})})
+				$(e.currentTarget).addClass("rich");
 				item.set({current: true});
 				this.render();
 			}
@@ -244,8 +245,9 @@ $(document).ready(function(){
     	$(".canvas-container").css("margin", "0 auto");	 	
 	 },
 	 blog: function(){
-	 	alert("blogging!");
-	 }
+	 	$("#container").css("height","100%");
+		window.navMenuView = new NavMenuView();
+	   }
 	 }
 	 );	
 	window.App = new Gregkerzhner();

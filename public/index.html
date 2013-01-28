@@ -22,8 +22,14 @@
     <script type="text/template" id="blog-template">
       <div class = "blog-container" id="blog-container"> 
         <div class = "blog-nav">
+
           <% _.each(blogs, function(blog) { %>
-          <span class = "blog-nav-link" data-id=<%= blog.attributes.id %>><%= blog.attributes.title %></span>
+          <% if (blog.get("current") == true){%>
+             <span class = "blog-nav-link rich" data-id=<%= blog.attributes.id %>><%= blog.attributes.title %></span>
+            <%}else{%>
+              <span class = "blog-nav-link" data-id=<%= blog.attributes.id %>><%= blog.attributes.title %></span>
+            <%}%>
+          
           <% }); %>  
         </div>
         <div class = "blog-main">

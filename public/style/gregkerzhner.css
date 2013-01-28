@@ -50,6 +50,7 @@ span:hover{
 	min-width: 100px;
 	height: 100%;	
 	float: left;
+	padding-left: 10px;
 }
 .blog-nav-link{
 	float: left;
