@@ -64,7 +64,7 @@
     <script type="text/template" id="menu-template">
       <div class = "nav-menu">
         <% _.each(data, function(menuItem) { %>
-          <span class = "nav-menu-link" data-id=<%= menuItem.attributes.id %>><%= menuItem.attributes.title %></span>
+          <span class = "nav-menu-link" id=<%="nav-menu-link"+ menuItem.attributes.id %> data-id=<%= menuItem.attributes.id %>><%= menuItem.attributes.title %></span>
         <% }); %>      
       </div>
     </script>

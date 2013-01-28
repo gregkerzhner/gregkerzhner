@@ -107,18 +107,18 @@ $(document).ready(function(){
 			 animationCounter++;
 			 canvas.forEachObject(
 			 	function(obj){ 			 	
-			 		if(animationCounter>50 && animationCounter<100){
+			 		if(animationCounter>20 && animationCounter<60){
 			 			obj.lightTheFuse(5);			
 			 		}	
-			 		else if(animationCounter>100 && animationCounter<200){
+			 		else if(animationCounter>60 && animationCounter<130){
 			 	 		obj.proximize();
-			 	 	} else if(animationCounter>250){
+			 	 	} else if(animationCounter>130){
 			 	 		obj.goAway(25);
 			 	 	}
 			 	}
 			  );
 			  canvas.renderAll();
-			  if(animationCounter<0){
+			  if(animationCounter<170){
 			
 			  	setTimeout(animate, 10);
 				}
@@ -135,7 +135,9 @@ $(document).ready(function(){
 			$("#container").css("height","100%");
 			window.navMenuView = new NavMenuView();
 			$(this.el).removeData().unbind();
-
+			if(Backbone.history.fragment == "blog"){
+				 console.log("blogging here");
+			}
 			
 		}
 	});
@@ -211,13 +213,20 @@ $(document).ready(function(){
 			this.collection = new NavMenuItems();
 			for (var i = 0; i<window.navMenuSeed.length; i++){
 				var navMenuItem = new NavMenuItem(window.navMenuSeed[i]);
-				if(i == 0){
-					navMenuItem.setCurrent();					
-				}
 				this.collection.add(navMenuItem);
 			}
-			this.render();
-			$($(".nav-menu-link")[0]).addClass("rich");
+			if(this.collection.where({title: Backbone.history.fragment}).length>0){
+				this.collection.where({title: Backbone.history.fragment})[0].setCurrent();
+				this.render();
+				$($("#nav-menu-link"+this.collection.where({title: Backbone.history.fragment})[0].id)).addClass("rich");
+			}
+			else{
+				this.collection.models[0].setCurrent();		
+				this.render();	
+				$($(".nav-menu-link")[0]).addClass("rich");				
+			}
+			
+			
 		},
 		render: function(){
 			$(this.el).append(this.template({data: this.collection.models}));
@@ -233,7 +242,7 @@ $(document).ready(function(){
 	window.Gregkerzhner = Backbone.Router.extend({
 	routes: {
 	    '': 'home',	
-	    'blog':  'blog'   
+	    'blog':  'home'   
 	},
 
 	initialize: function() {
@@ -243,13 +252,7 @@ $(document).ready(function(){
 	 home: function(){
 	 	$("canvas").html(this.introView.render().el);
     	$(".canvas-container").css("margin", "0 auto");	 	
-	 },
-	 blog: function(){
-		$("#introCanvas").remove();
-		$(".canvas-container").remove();
-		$("#container").css("height","100%");
-		window.navMenuView = new NavMenuView();
-	   }
+		}
 	 }
 	 );	
 	window.App = new Gregkerzhner();
