@@ -118,7 +118,7 @@ $(document).ready(function(){
 			 	}
 			  );
 			  canvas.renderAll();
-			  if(animationCounter<300){
+			  if(animationCounter<0){
 			
 			  	setTimeout(animate, 10);
 				}
@@ -154,8 +154,7 @@ $(document).ready(function(){
 		},
 		render: function(){
 			$(this.el).empty();
-		  var currentId = this.collection.current;
-		  var currentModel = this.collection.get(currentId);
+		    var currentModel = this.collection.where({current: true})[0];
 			$(this.el).append(this.template({blogs: this.collection.models, currentModel: currentModel}));
 			return this;
 		},
@@ -163,8 +162,9 @@ $(document).ready(function(){
 			console.log("changing blogs");
 			var id = $(e.currentTarget).data("id");
 			var item = this.collection.get(id);
-			if(this.collection.current!==id){
-				this.collection.current = id;
+			if(this.collection.where({current: true})[0] != item){
+				this.collection.each(function(model){model.set({current: false})})
+				item.set({current: true});
 				this.render();
 			}
 		}
@@ -220,7 +220,6 @@ $(document).ready(function(){
 		},
 		render: function(){
 			$(this.el).append(this.template({data: this.collection.models}));
-			return this;
 		},
 		navigate: function(e){
 			$(".nav-menu-link").removeClass("rich");
@@ -232,7 +231,8 @@ $(document).ready(function(){
 	});
 	window.Gregkerzhner = Backbone.Router.extend({
 	routes: {
-	    '': 'home',	   
+	    '': 'home',	
+	    'blog':  'blog'   
 	},
 
 	initialize: function() {
@@ -242,7 +242,11 @@ $(document).ready(function(){
 	 home: function(){
 	 	$("canvas").html(this.introView.render().el);
     	$(".canvas-container").css("margin", "0 auto");	 	
-	 }}
+	 },
+	 blog: function(){
+	 	alert("blogging!");
+	 }
+	 }
 	 );	
 	window.App = new Gregkerzhner();
     Backbone.history.start();
