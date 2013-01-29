@@ -97,3 +97,22 @@ a{
 .rich{
 	color: #C76245;
 }
+.portfolio-container{
+	height: 80%;
+}
+.project-block{
+	width: 30%;
+	height: 60%;
+	float: left;
+	padding: 5px;
+	padding-left: 20px;
+	margin: 5px;
+	background-color: #272727;
+}
+.project-block img{
+	float: left;
+	width: 90%;
+	height: 90%;
+	margin: 10 5px;
+	padding-bottom: 10px;
+}

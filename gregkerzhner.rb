@@ -9,3 +9,8 @@ get '/blogs' do
   send_file "public/blogs.json"
   
 end
+
+get '/projects' do
+  content_type "application/json"
+  send_file "public/works.json"
+end

@@ -19,6 +19,27 @@ blogs.fetch({
 	console.log("error");
     console.log(r.responseText);
 }});
+
+ window.Project = Backbone.Model.extend({
+
+
+});
+
+window.Projects = Backbone.Collection.extend({
+	model: Project,
+	url: "/projects"
+	
+});
+window.projects = new Projects();
+projects.fetch({
+	success: function(m,r){
+          console.log("success");
+          console.log(r); // => 2 (collection have been populated)
+    },
+	error: function(m,r){
+	console.log("error");
+    console.log(r.responseText);
+}});
 $(document).ready(function(){
 	window.coordinates = [[310,95],[320,93],[300,100], [295,120],[290,140],[287,160],[284,180],[283,200],[282,220],[283,240],[284,260],[290,280],[295,300],[305,315],[315,320],[325,322],
 	[335,320],[340,315],[350,310],[360,300],[360,290],[355,280],[350,277],[340,277],
@@ -29,7 +50,7 @@ $(document).ready(function(){
 
 
 	];
-	window.navMenuSeed = [{id: 1, title: "home"},{id: 2,title: "blog"}];
+	window.navMenuSeed = [{id: 1, title: "home"},{id: 2,title: "blog"},{id: 3,title: "portfolio"}];
 	fabric.RotatingSquare = fabric.util.createClass(fabric.Rect, {
 	    type: 'RotatingSquare',
 
@@ -118,7 +139,7 @@ $(document).ready(function(){
 			 	}
 			  );
 			  canvas.renderAll();
-			  if(animationCounter<170){
+			  if(animationCounter<0){
 			
 			  	setTimeout(animate, 10);
 				}
@@ -172,7 +193,20 @@ $(document).ready(function(){
 			}
 		}
 	})
-
+	window.PortfolioView = Backbone.View.extend({
+		el: "#main",
+		collection: window.projects,
+		initialize: function(){
+			_.bindAll(this, 'render');
+			this.template = _.template($("#portfolio-template").html());
+			this.render();
+		},
+		render: function(){
+		  	$(this.el).empty();
+			$(this.el).append(this.template({projects: this.collection.models}));
+			return this;
+		}
+	});
 	window.HomeView = Backbone.View.extend({
 		el: "#main",
 		initialize: function(){
@@ -191,6 +225,9 @@ $(document).ready(function(){
 			this.set({current: true})
 			if(this.get("title")==="blog"){
 			  new BlogView();
+			}
+			else if(this.get("title") === "portfolio"){				
+				new PortfolioView();
 			}
 			else{
 				new HomeView();
