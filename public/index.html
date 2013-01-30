@@ -59,14 +59,17 @@
     </script>
     <script type="text/template" id="portfolio-template">
       <div class = "portfolio-container" id="portfolio-container"> 
-        <% _.each(projects, function(project) { %>
-          <div class = "project-block">
-            <div class = "project-title"><%= project.attributes.name %></div>
-            <img src = <%= project.attributes.image %>></img>
-          </div>
-          
-        <% }); %>  
- 
+        <div class = "project-display"></div>
+        <div class = "project-list">
+          <% _.each(projects, function(project) { %>
+            <div class = "project-block">
+              <div class = "project-title"><%= project.attributes.name %></div>
+              <img src = <%= project.attributes.image %>></img>
+              <div class = "project-description hide"><%=project.attributes.description%></div>
+            </div>
+            
+          <% }); %>  
+        </div>
       </div>
      
     </script>

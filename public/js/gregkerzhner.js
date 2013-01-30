@@ -168,7 +168,7 @@ $(document).ready(function(){
 		model: window.blogs.where({current: true}),
 		events: {
       		'click .blog-nav-link': 'navigate'
-    },
+    	},
 		initialize: function(){
 			_.bindAll(this, 'render');
 			this.collection.bind('change', this.changeBlogs);
@@ -195,6 +195,9 @@ $(document).ready(function(){
 	})
 	window.PortfolioView = Backbone.View.extend({
 		el: "#main",
+		events: {
+      		'click .project-block': 'showProject'
+    	},
 		collection: window.projects,
 		initialize: function(){
 			_.bindAll(this, 'render');
@@ -205,6 +208,18 @@ $(document).ready(function(){
 		  	$(this.el).empty();
 			$(this.el).append(this.template({projects: this.collection.models}));
 			return this;
+		},
+		showProject: function(e){
+			$(".project-block img").addClass("hide");
+			$(".project-list").addClass("blocks-on-the-sideline");
+			$(".project-display").empty();
+			$(".project-display").css("height","80%");
+			$(".project-display").append($(e.currentTarget).clone());
+			$(".project-display .project-block").addClass("block-on-display");
+			$(".project-display .project-block .project-description").removeClass("hide");
+			$($(".project-display .project-block").find("img")).removeClass("hide");
+			$($(".project-display .project-block").find("img")).css("width","40%");
+			$($(".project-display .project-block").find("img")).css("height","80%");
 		}
 	});
 	window.HomeView = Backbone.View.extend({

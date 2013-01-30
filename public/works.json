@@ -2,14 +2,26 @@
 	"id" : "1",
     "name": "GoPro",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-	"image":"http://media.tumblr.com/tumblr_lrob2ihAdD1r03ph2.jpg"
+	"image":"http://www.surf-station.com/wp-content/uploads/2012/11/laser_cat-290x200.jpg"
 	},
 
    {
 	"id" : "2",
     "name": "Tara Reynvaan Photography",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-	"image":"http://media.tumblr.com/tumblr_lrob2ihAdD1r03ph2.jpg"
+	"image":"https://tarareynvaan.s3.amazonaws.com/uploads/zepher.jpg"
+   },
+   {
+	"id" : "3",
+    "name": "Nike",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+	"image":"http://rookery.s3.amazonaws.com/1004500/1004927_28ac_1024x2000.jpg"
+   },
+   {
+	"id" : "4",
+    "name": "HealthNet",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+	"image":"http://www.molinahealthcare.com/medicaid/members/mo/PublishingImages/Dr.Cleo%20autographed-small.jpg"
    }
 
 ]
