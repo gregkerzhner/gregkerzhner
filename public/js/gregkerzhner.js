@@ -50,7 +50,7 @@ $(document).ready(function(){
 
 
 	];
-	window.navMenuSeed = [{id: 1, title: "home"},{id: 2,title: "blog"},{id: 3,title: "portfolio"}];
+	window.navMenuSeed = [{id: 1, title: "home"},{id: 2,title: "blog"},{id: 3,title: "projects"}];
 	fabric.RotatingSquare = fabric.util.createClass(fabric.Rect, {
 	    type: 'RotatingSquare',
 
@@ -226,7 +226,7 @@ $(document).ready(function(){
 			if(this.get("title")==="blog"){
 			  new BlogView();
 			}
-			else if(this.get("title") === "portfolio"){				
+			else if(this.get("title") === "projects"){				
 				new PortfolioView();
 			}
 			else{
@@ -279,7 +279,8 @@ $(document).ready(function(){
 	window.Gregkerzhner = Backbone.Router.extend({
 	routes: {
 	    '': 'home',	
-	    'blog':  'home'   
+	    'blog':  'home',
+	    'projects': 'home'   
 	},
 
 	initialize: function() {

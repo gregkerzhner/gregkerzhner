@@ -100,9 +100,12 @@ a{
 .portfolio-container{
 	height: 80%;
 }
+#main{
+	height: 90%;
+}
 .project-block{
 	width: 30%;
-	height: 60%;
+	height: 50%;
 	float: left;
 	padding: 5px;
 	padding-left: 20px;
@@ -113,6 +116,6 @@ a{
 	float: left;
 	width: 90%;
 	height: 90%;
-	margin: 10 5px;
+	margin: 10px 5px;
 	padding-bottom: 10px;
 }
