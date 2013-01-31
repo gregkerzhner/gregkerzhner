@@ -207,19 +207,31 @@ $(document).ready(function(){
 		render: function(){
 		  	$(this.el).empty();
 			$(this.el).append(this.template({projects: this.collection.models}));
+
 			return this;
 		},
 		showProject: function(e){
+			var photoHeight;
 			$(".project-block img").addClass("hide");
-			$(".project-list").addClass("blocks-on-the-sideline");
 			$(".project-display").empty();
 			$(".project-display").css("height","80%");
 			$(".project-display").append($(e.currentTarget).clone());
-			$(".project-display .project-block").addClass("block-on-display");
-			$(".project-display .project-block .project-description").removeClass("hide");
-			$($(".project-display .project-block").find("img")).removeClass("hide");
-			$($(".project-display .project-block").find("img")).css("width","40%");
-			$($(".project-display .project-block").find("img")).css("height","80%");
+			if(parseInt($("body").css("width"))<1000){
+				$(".project-block").removeClass("responsive-sideline-block");
+				$(".project-display .project-block").addClass("block-on-display-responsive");
+				$(".project-display .project-block .project-description").removeClass("hide");
+				$(".project-list .project-block").addClass("responsive-sideline-block");
+			}
+			else{
+				$(".project-list .project-block").addClass("regular-sideline-block");
+				$(".project-display .project-block").addClass("block-on-display");
+				$(".project-display .project-block .project-description").removeClass("hide");
+				$($(".project-display .project-block").find("img")).removeClass("hide");
+				$($(".project-display .project-block").find("img")).css("height","80%");
+				photoHeight = parseInt($($(".project-display .project-block").find("img")).css("height"))
+				$($(".project-display .project-block").find("img")).css("width",(photoHeight*1.5)+"px");
+			}
+		
 		}
 	});
 	window.HomeView = Backbone.View.extend({

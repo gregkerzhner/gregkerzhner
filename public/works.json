@@ -2,14 +2,14 @@
 	"id" : "1",
     "name": "GoPro",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-	"image":"http://www.surf-station.com/wp-content/uploads/2012/11/laser_cat-290x200.jpg"
+	"image":"https://s3.amazonaws.com/tarareynvaan/gopro.jpg"
 	},
 
    {
 	"id" : "2",
     "name": "Tara Reynvaan Photography",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-	"image":"https://tarareynvaan.s3.amazonaws.com/uploads/zepher.jpg"
+	"image":"https://s3.amazonaws.com/tarareynvaan/tarareynvaan.jpg"
    },
    {
 	"id" : "3",
@@ -21,7 +21,7 @@
 	"id" : "4",
     "name": "HealthNet",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-	"image":"http://www.molinahealthcare.com/medicaid/members/mo/PublishingImages/Dr.Cleo%20autographed-small.jpg"
+	"image":"https://s3.amazonaws.com/tarareynvaan/healthnet.jpg"
    }
 
 ]
