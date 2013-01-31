@@ -34,7 +34,8 @@ body{
 
 .nav-menu-link{
 	font-size: 30px;	
-	 /*safari and chrome */
+	transition: color .2s ease-in;
+	 -webkit-transition: color .2s ease-in;
 
 }
 
@@ -59,6 +60,7 @@ span:hover{
 	float: left;
 	width: 90%;
 	margin: 5px 0px;
+
 }
 .blog-main{
 	width: 50%;
