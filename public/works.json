@@ -1,26 +1,26 @@
 [ {
 	"id" : "1",
     "name": "GoPro",
-    "description": "Working on a ruby on rails powered content managment system for the most versitale camera maker in the world. <a href = 'www.gopro.com'>www.gopro.com</a>",
+    "description": "Working on a ruby on rails powered content managment system for the most versitale camera maker in the world. <a href = 'http://www.gopro.com' target='_blank'>www.gopro.com</a>",
 	"image":"https://s3.amazonaws.com/tarareynvaan/gopro.jpg"
 	},
 
    {
 	"id" : "2",
     "name": "Tara Reynvaan Photography",
-    "description": "A beautiful website for a producer of beautiful photographs.  <a href = 'www.tarareynvaan.com'>www.tarareynvaan.com</a>",
+    "description": "A rails portfolio and CMS for a producer of stunning outdoor images. <a href = 'http://www.tarareynvaan.com' target='_blank'>www.tarareynvaan.com</a>",
 	"image":"https://s3.amazonaws.com/tarareynvaan/tarareynvaan.jpg"
    },
    {
 	"id" : "3",
     "name": "Nike",
-    "description": "A java and javascript web app to manage and deliver Nike inventory to sponsored athletes.",
+    "description": "A Javascript and Java web app for Nike marketing employees to distribute merchandise to all of their sponsored athletes.  Aka, a web interface for Tiger Wood's closet.",
 	"image":"http://rookery.s3.amazonaws.com/1004500/1004927_28ac_1024x2000.jpg"
    },
    {
 	"id" : "4",
     "name": "HealthNet",
-    "description": "A web brain powered by open source BRMS technology that decides the fate of health care claims.",
+    "description": "A brain, powered by open source business rule management technology that decides the fates of health insurance claims of all members of the department of defense. ",
     	"image":"https://s3.amazonaws.com/tarareynvaan/healthnet.jpg"
    }
 

@@ -139,7 +139,7 @@ $(document).ready(function(){
 			 	}
 			  );
 			  canvas.renderAll();
-			  if(animationCounter<160){
+			  if(animationCounter<0){
 			
 			  	setTimeout(animate, 10);
 				}

@@ -112,8 +112,12 @@ a{
 	padding-left: 20px;
 	margin: 20px;
 	background-color: #272727;
+	transition: background-color 5s ease-in-out;
+	 -webkit-transition: background-color .5s ease-in; /*safari and chrome */
+	 -o-transition: color 1s ease-in; /* opera */
 }
 .project-block.highlight:hover{
+	cursor: pointer;
 	background-color:#C76245;
 }
 .project-block img{
@@ -161,6 +165,7 @@ a{
 .regular-sideline-block{
 	width: 10%;
 	min-width: 20px;
+	height: 40px;
 }
 .project-description{
 	margin: 10px 0px 10px 30px;
