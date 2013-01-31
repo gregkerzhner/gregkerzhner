@@ -76,16 +76,16 @@ $(document).ready(function(){
 	    lightTheFuse: function(delta){
 	    	this.left = this.left + Math.floor(Math.random()*delta) - Math.floor(Math.random()*delta);
 	    	this.top = this.top + Math.floor(Math.random()*delta) - Math.floor(Math.random()*delta);
-	    },
-	    goAway: function(delta){
-	    	if(this.left>350){
-	    		this.left += Math.floor(Math.random()*delta);
-	    	}
-	    	else{
-	    		this.left-= Math.floor(Math.random()*delta);
-	    	}
+		    },
+		    goAway: function(delta){
+		    	if(this.left>350){
+		    		this.left += Math.floor(Math.random()*delta);
+		    	}
+		    	else{
+		    		this.left-= Math.floor(Math.random()*delta);
+		    	}
 
-	    	if(this.top<160){
+		    	if(this.top<160){
 	    		this.top -= Math.floor(Math.random()*delta);
 	    	}
 	    	else{
@@ -217,6 +217,7 @@ $(document).ready(function(){
 			$(".project-display").empty();
 			$(".project-display").css("height","80%");
 			$(".project-display").append($(e.currentTarget).clone());
+			$(".project-display .project-block").removeClass("highlight");
 			if(parseInt($("body").css("width"))<1000){
 				$(".project-block").removeClass("responsive-sideline-block");
 				$(".project-display .project-block").addClass("block-on-display-responsive");

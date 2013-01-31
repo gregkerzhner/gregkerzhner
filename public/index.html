@@ -62,7 +62,7 @@
         <div class = "project-display"></div>
         <div class = "project-list">
           <% _.each(projects, function(project) { %>
-            <div class = "project-block">
+            <div class = "project-block highlight">
               <div class = "project-title"><%= project.attributes.name %></div>
               <img src = <%= project.attributes.image %>></img>
               <div class = "project-description hide"><%=project.attributes.description%></div>

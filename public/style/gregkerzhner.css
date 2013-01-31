@@ -113,7 +113,7 @@ a{
 	margin: 20px;
 	background-color: #272727;
 }
-.project-block:hover{
+.project-block.highlight:hover{
 	background-color:#C76245;
 }
 .project-block img{
@@ -166,4 +166,7 @@ a{
 	margin: 10px 0px 10px 30px;
 	width: 30%;
 	float: left;
+}
+.nohighlight{
+
 }

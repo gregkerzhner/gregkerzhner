@@ -1,27 +1,27 @@
 [ {
 	"id" : "1",
     "name": "GoPro",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+    "description": "Working on a ruby on rails powered content managment system for the most versitale camera maker in the world. <a href = 'www.gopro.com'>www.gopro.com</a>",
 	"image":"https://s3.amazonaws.com/tarareynvaan/gopro.jpg"
 	},
 
    {
 	"id" : "2",
     "name": "Tara Reynvaan Photography",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+    "description": "A beautiful website for a producer of beautiful photographs.  <a href = 'www.tarareynvaan.com'>www.tarareynvaan.com</a>",
 	"image":"https://s3.amazonaws.com/tarareynvaan/tarareynvaan.jpg"
    },
    {
 	"id" : "3",
     "name": "Nike",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+    "description": "A java and javascript web app to manage and deliver Nike inventory to sponsored athletes.",
 	"image":"http://rookery.s3.amazonaws.com/1004500/1004927_28ac_1024x2000.jpg"
    },
    {
 	"id" : "4",
     "name": "HealthNet",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-	"image":"https://s3.amazonaws.com/tarareynvaan/healthnet.jpg"
+    "description": "A web brain powered by open source BRMS technology that decides the fate of health care claims.",
+    	"image":"https://s3.amazonaws.com/tarareynvaan/healthnet.jpg"
    }
 
 ]
