@@ -178,7 +178,13 @@ $(document).ready(function(){
 		render: function(){
 			$(this.el).empty();
 		    var currentModel = this.collection.where({current: true})[0];
-			$(this.el).append(this.template({blogs: this.collection.models, currentModel: currentModel}));
+		    $(this.el).append(this.template({blogs: this.collection.models, currentModel: currentModel}));
+		    if(currentModel.attributes.animation_id>0){
+		    	var animation = new window.animations[currentModel.attributes.animation_id]();
+		    	animation.render();
+		    }
+		   
+				
 			return this;
 		},
 		navigate: function(e){

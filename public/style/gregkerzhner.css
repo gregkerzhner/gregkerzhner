@@ -34,7 +34,10 @@ body{
 
 .nav-menu-link{
 	font-size: 30px;	
+	 /*safari and chrome */
+
 }
+
 span:hover{
 	cursor: pointer;
 	color: #C76245;
@@ -114,7 +117,7 @@ a{
 	background-color: #272727;
 	transition: background-color 5s ease-in-out;
 	 -webkit-transition: background-color .5s ease-in; /*safari and chrome */
-	 -o-transition: color 1s ease-in; /* opera */
+
 }
 .project-block.highlight:hover{
 	cursor: pointer;
@@ -172,6 +175,8 @@ a{
 	width: 30%;
 	float: left;
 }
-.nohighlight{
-
+#foambackCanvas{
+	background-image: url(https://s3.amazonaws.com/tarareynvaan/RyanCruxing1.jpg);
+	background-size:900px 600px;
+	background-repeat:no-repeat;
 }
