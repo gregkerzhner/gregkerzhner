@@ -212,6 +212,7 @@ $(document).ready(function(){
 		},
 		showProject: function(e){
 			var photoHeight;
+			$(".project-list .project-block").removeClass("regular-sideline-block");
 			$(".project-block img").addClass("hide");
 			$(".project-display").empty();
 			$(".project-display").css("height","80%");
