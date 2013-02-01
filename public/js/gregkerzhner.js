@@ -303,7 +303,7 @@ $(document).ready(function(){
 			  	top: Math.floor(Math.random()*500),
 			  	finalLeft: window.coordinates[i][0],
 			  	finalTop: window.coordinates[i][1],
-			  	fill: '#F6F6F6',
+			  	fill: '#'+Math.floor(Math.random()*16777215).toString(16),
 			  	width: 10,
 			  	height: 10,
 			  	angle: 45	
@@ -453,6 +453,7 @@ $(document).ready(function(){
 			else if(this.get("title") === "projects"){				
 				new PortfolioView();
 			}
+			
 			else{
 				new HomeView();
 			}
