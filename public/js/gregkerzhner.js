@@ -328,7 +328,7 @@ $(document).ready(function(){
 			  );
 			  canvas.renderAll();
 
-			  if(animationCounter<0){
+			  if(animationCounter<170){
 
 			  	setTimeout(animate, 10);
 				}
@@ -345,9 +345,6 @@ $(document).ready(function(){
 			$("#container").css("height","100%");
 			window.navMenuView = new NavMenuView();
 			$(this.el).removeData().unbind();
-			if(Backbone.history.fragment == "blog"){
-				 console.log("blogging here");
-			}
 			
 		}
 	});
