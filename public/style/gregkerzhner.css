@@ -1,11 +1,10 @@
 @font-face {
   font-family: "wiggles";
-  src: url("fonts/258502_0_0.woff");
-
-	    
+  src: url("fonts/258502_0_0.woff");	    
 }
 html{
 	height: 100%;
+	overflow:scroll;
 }
 body{
 	background-color: #202020;
@@ -13,6 +12,9 @@ body{
 	width: 100%;
 	font-family: "wiggles";
 	color: #E9E6DE;
+}
+.left{
+	float: left;
 }
 #container{
 	width: 100%;
@@ -39,7 +41,7 @@ body{
 
 }
 
-span:hover{
+.nav-menu span:hover{
 	cursor: pointer;
 	color: #C76245;
 }
@@ -102,6 +104,15 @@ a{
 .rich{
 	color: #C76245;
 }
+.dark{
+	color: #272727;
+}
+.big-font{
+	font-size: 22px;
+}
+.padded{
+	padding: 20px;
+}
 .portfolio-container{
 	height: 80%;
 }
@@ -130,6 +141,10 @@ a{
 	height: 70%;
 	margin: 10px 5px;
 	padding-bottom: 10px;
+	max-height: 400px;
+}
+.explicit{
+	height: 70%;
 }
 .responsive-img{
 	width: 80%;
@@ -181,4 +196,18 @@ a{
 	background-image: url(https://s3.amazonaws.com/tarareynvaan/RyanCruxing1.jpg);
 	background-size:900px 600px;
 	background-repeat:no-repeat;
+}
+.moar-skillz-container{
+	height: 80%;
+	width: 100%;
+	background-color: #e2dac5;
+	float: left;
+}
+.skillz-border{
+	width: 100%;
+	height: 10px;
+	/*background-image:url('https://s3.amazonaws.com/tarareynvaan/fail.png');
+	background-repeat:repeat-x;*/
+	float: left;
+	margin-top: 30px;
 }

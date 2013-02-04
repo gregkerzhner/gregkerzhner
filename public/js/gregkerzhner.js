@@ -328,7 +328,7 @@ $(document).ready(function(){
 			  );
 			  canvas.renderAll();
 
-			  if(animationCounter<170){
+			  if(animationCounter<0){
 
 			  	setTimeout(animate, 10);
 				}
@@ -402,7 +402,6 @@ $(document).ready(function(){
 		render: function(){
 		  	$(this.el).empty();
 			$(this.el).append(this.template({projects: this.collection.models}));
-
 			return this;
 		},
 		showProject: function(e){
