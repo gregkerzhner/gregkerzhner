@@ -1,26 +1,26 @@
 [ {
 	"id" : "1",
     "name": "GoPro",
-    "description": "Working on a ruby on rails powered content managment system for the most versitale camera maker in the world. <a href = 'http://www.gopro.com' target='_blank'>www.gopro.com</a>",
+    "description": "Building a Ruby on Rails content management system that powers the super-bowl featured <a href = 'http://www.gopro.com' target='_blank'>www.gopro.com</a> and handles 25,000 concurrent users. </p><span class = 'icon-flag'>Backbone.js</span> </p><span class = 'icon-flag'>Ruby on Rails</span> </p><span class = 'icon-flag'>MySQL</span>",
 	"image":"https://s3.amazonaws.com/tarareynvaan/gopro.jpg"
 	},
 
    {
 	"id" : "2",
     "name": "Tara Reynvaan Photography",
-    "description": "A rails portfolio and CMS for a producer of stunning outdoor images. <a href = 'http://www.tarareynvaan.com' target='_blank'>www.tarareynvaan.com</a>",
+    "description": "A responsive, beautiful portfolio and content management system for a producer of stunning outdoor images. <a href = 'http://www.tarareynvaan.com' target='_blank'>www.tarareynvaan.com</a>.  </p><span class = 'icon-flag'>JQuery</span> </p><span class = 'icon-flag'>Ruby on Rails</span> </p><span class = 'icon-flag'>PostgreSQL</span>",
 	"image":"https://s3.amazonaws.com/tarareynvaan/tarareynvaan.jpg"
    },
    {
 	"id" : "3",
     "name": "Nike",
-    "description": "A Javascript and Java web app for Nike marketing employees to distribute merchandise to all of their sponsored athletes.  Aka, a web interface for Tiger Wood's closet.",
+    "description": "A Javascript and Java web app for Nike marketing employees to distribute merchandise to all of their sponsored athletes.  Aka, a web interface for Tiger Wood's closet.  </p><span class = 'icon-flag'>ExtJS</span> </p><span class = 'icon-flag'>Spring/Java</span> </p><span class = 'icon-flag'>Oracle</span>",
 	"image":"http://rookery.s3.amazonaws.com/1004500/1004927_28ac_1024x2000.jpg"
    },
    {
 	"id" : "4",
     "name": "HealthNet",
-    "description": "A brain, powered by open source business rule management technology that decides the fates of health insurance claims of all members of the department of defense. ",
+    "description": "A brain, powered by open source business rule management technology that decides the fates of health insurance claims of all members of the department of defense. </p><span class = 'icon-flag'>Drools/BRMS</span> </p><span class = 'icon-flag'>Java</span>",
     	"image":"https://s3.amazonaws.com/tarareynvaan/healthnet.jpg"
    }
 
