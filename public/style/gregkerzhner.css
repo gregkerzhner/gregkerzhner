@@ -5,8 +5,12 @@
 html{
 	height: 100%;
 	overflow:scroll;
+	margin: 0;
+  padding: 0;
 }
 body{
+	margin: 0;
+  padding: 0;
 	background-color: #202020;
 	height: 100%;
 	width: 100%;
