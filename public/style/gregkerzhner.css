@@ -116,7 +116,7 @@ a{
 	font-size: 22px;
 }
 .padded{
-	padding: 20px;
+	padding: 30px;
 }
 .portfolio-container{
 	height: 80%;
@@ -204,6 +204,11 @@ a{
 #foambackCanvas{
 	background-image: url(https://s3.amazonaws.com/tarareynvaan/RyanCruxing1.jpg);
 	background-size:900px 600px;
+	background-repeat:no-repeat;
+}
+#snailhouseCanvas{
+	background-image: url(https://s3.amazonaws.com/tarareynvaan/house.jpg);
+	background-size:800px 1000px;
 	background-repeat:no-repeat;
 }
 .moar-skillz-container{
