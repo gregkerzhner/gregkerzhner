@@ -42,6 +42,7 @@ body{
 	font-size: 30px;	
 	transition: color .2s ease-in;
 	 -webkit-transition: color .2s ease-in;
+	 -moz-transition: color .2s ease-in;
 
 }
 
@@ -133,8 +134,8 @@ a{
 	margin: 20px;
 	background-color: #272727;
 	transition: background-color 5s ease-in-out;
-	 -webkit-transition: background-color .5s ease-in; /*safari and chrome */
-
+	-webkit-transition: background-color .5s ease-in; /*safari and chrome */
+	-moz-transition: background-color .5s ease-in;
 }
 .project-block.highlight:hover{
 	cursor: pointer;
