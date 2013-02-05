@@ -164,6 +164,7 @@ a{
 .block-on-display-responsive{
 	height: 100%;
 	width: 80%;
+	min-height: 250px;
 	float: left;
 }
 
@@ -196,13 +197,17 @@ a{
 	width: 30%;
 	float: left;
 }
+.project-display{
+	min-height: 250px;
+}
 #foambackCanvas{
 	background-image: url(https://s3.amazonaws.com/tarareynvaan/RyanCruxing1.jpg);
 	background-size:900px 600px;
 	background-repeat:no-repeat;
 }
 .moar-skillz-container{
-	height: 80%;
+	height: 60%;
+	min-height: 400px;
 	width: 100%;
 	background-color: #e2dac5;
 	float: left;

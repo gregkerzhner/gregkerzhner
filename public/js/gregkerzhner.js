@@ -406,6 +406,7 @@ $(document).ready(function(){
 			$(".project-list .project-block").removeClass("regular-sideline-block");
 			$(".project-block img").addClass("hide");
 			$(".project-display").empty();
+			$(".project-display").removeClass("hide");
 			$(".project-display").css("height","80%");
 			$(".project-display").append($(e.currentTarget).clone());
 			$(".project-display .project-block").removeClass("highlight");
