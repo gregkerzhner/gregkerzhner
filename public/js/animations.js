@@ -68,6 +68,7 @@ $(document).ready(function(){
 			var bubbleCounter = 0;
 			var mooCounter = 0;
 			var horseCounter = 0;
+			var climberCounter = 0;	
 			$(this.el).empty();
 			$(this.el).append(this.template());
 			var canvas = new fabric.Canvas('snailhouseCanvas', { width: 800, height: 1200 });
@@ -110,10 +111,32 @@ $(document).ready(function(){
 					canvas.add(img);
 	  			});
 	  		 }
+	  		 climberCounter ++;
+	  		 if (climberCounter>46){
+	  		 	climberCounter = 0;
+	  		 }
 			 canvas.forEachObject(function(obj) {
 			    if(obj.get("climber")){
-				    obj.top -= 1;
-				    obj.setAngle(obj.getAngle() + 10);
+				    if(climberCounter == 36){
+				    	obj.top += 15;
+				    	obj.left +=15;
+				    	 var climberTop = obj.top-50;
+				    	var climberLeft = obj.left+50;
+				    	fabric.Image.fromURL('https://s3.amazonaws.com/tarareynvaan/fail.png', function(img) {
+							img.set('left', climberLeft);
+							img.set('top', climberTop);
+							img.set('scaleY', .7)
+							img.set('failbubble',true);
+							canvas.add(img);
+	  					});	
+				    }
+				    else if (climberCounter > 36){
+						console.log("noting");
+				    }
+				    else{
+				 		obj.top -= 1;
+				    	obj.setAngle(obj.getAngle() + 10);
+				    }
 				    console.log(obj.top);
 				    if (obj.top < 100) {
 	      				canvas.remove(obj);
@@ -126,6 +149,9 @@ $(document).ready(function(){
 							canvas.add(img);
 		  				});
 	    			}
+    			}
+    			else if(obj.get("failbubble")&& climberCounter>44){
+    				canvas.remove(obj);
     			}
     			else if(obj.get("bubble")){
     				if(bubbleCounter > 30){
