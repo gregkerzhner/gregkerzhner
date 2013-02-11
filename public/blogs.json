@@ -11,12 +11,13 @@
     "title" : "Foaming",
     "body" : ""
 
-  }, 
+  }
+  ,
   {
     "id" : "3",
     "animation_id" : "2",
     "current" : true,
-    "title" : "Snailhouse",
+    "title" : "Instasearch",
     "body" : ""
 
   }
