@@ -10,6 +10,12 @@ get '/blogs' do
   
 end
 
+get '/countries' do
+  content_type "application/json"
+  send_file "public/world.json"
+  
+end
+
 get '/projects' do
   content_type "application/json"
   send_file "public/works.json"
