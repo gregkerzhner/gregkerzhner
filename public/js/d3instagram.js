@@ -54,7 +54,7 @@
                             .style("fill","rgb(178,34,34)");
                         }
                     }
-                    if(dotCounter<100){
+                    if(dotCounter<100 && data.pagination.next_url){
                        searchInstagram(data.pagination.next_url+"&callback=?");
                     }
                 });
