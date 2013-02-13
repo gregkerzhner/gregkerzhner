@@ -34,6 +34,7 @@ $(document).ready(function(){
                         .style("stroke", "rgb(6,120,155)");
             });
             $(".instagram-search-container .search").click(function(){
+                svg.selectAll("circle").remove();
                 $.getJSON("https://api.instagram.com/v1/tags/"+$(".search-term").val()+"/media/recent?access_token=306225576.f59def8.ddd35b2913c945d8b6f0e88f840c9944&callback=?", function(data){
                     for(var i = 0; i<data.data.length;i++){
                         var hashtag = data.data[i];
