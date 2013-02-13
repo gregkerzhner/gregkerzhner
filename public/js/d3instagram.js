@@ -10,9 +10,11 @@ $(document).ready(function(){
         },
         render: function(){
             var svg;
+            var dotCounter = 0;
             var that = this;
             $(this.el).empty();
             $(this.el).append(this.template());
+
             d3.json(
             "/countries",
             function (json) {
@@ -35,10 +37,14 @@ $(document).ready(function(){
             });
             $(".instagram-search-container .search").click(function(){
                 svg.selectAll("circle").remove();
-                $.getJSON("https://api.instagram.com/v1/tags/"+$(".search-term").val()+"/media/recent?access_token=306225576.f59def8.ddd35b2913c945d8b6f0e88f840c9944&callback=?", function(data){
+                searchInstagram("https://api.instagram.com/v1/tags/"+$(".search-term").val()+"/media/recent?access_token=306225576.f59def8.ddd35b2913c945d8b6f0e88f840c9944&callback=?");
+            });
+            var searchInstagram = function(url){                
+                $.getJSON(url, function(data){
                     for(var i = 0; i<data.data.length;i++){
                         var hashtag = data.data[i];
                         if(hashtag.location){
+                            dotCounter++;
                             var points = d3.geo.mercator().scale(900).translate([500, 500])([hashtag.location.longitude,hashtag.location.latitude])
                             svg.append("svg:circle")
                             .attr("cx", points[0])
@@ -47,8 +53,11 @@ $(document).ready(function(){
                             .style("fill","rgb(178,34,34)");
                         }
                     }
+                    if(dotCounter<100){
+                       searchInstagram(data.pagination.next_url+"&callback=?");
+                    }
                 });
-            })
+            }
         }
     });
 
