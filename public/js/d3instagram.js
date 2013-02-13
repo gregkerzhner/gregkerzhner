@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     window.animations[2] =  Backbone.View.extend({
         template: _.template($("#instagram-map-template").html()),
         className:  "intro",
@@ -8,11 +7,10 @@ $(document).ready(function(){
         initialize: function(){
             _.bindAll(this, 'render');
             this.template = _.template($("#instagram-map-template").html());
-
         },
         render: function(){
+            var svg;
             var that = this;
-            //var countriesData =  var path = d3.geo.path().projection(countriesData);
             $(this.el).empty();
             $(this.el).append(this.template());
             d3.json(
@@ -35,20 +33,22 @@ $(document).ready(function(){
                         .attr("d", path)
                         .style("stroke", "rgb(6,120,155)");
             });
-            var doStuff = function(){
-                var points = d3.geo.mercator().scale(900).translate([500, 500])([-120.665606609,37.961217383])
-                svg.append("svg:circle")
-                .attr("cx", points[0])
-                .attr("cy", points[1]).attr("r",2)
-                .style("stroke", "rgb(6,120,155)");
-            }
-            setTimeout(doStuff,300);
-       
-
-
+            $(".instagram-search-container .search").click(function(){
+                $.getJSON("https://api.instagram.com/v1/tags/"+$(".search-term").val()+"/media/recent?access_token=306225576.f59def8.ddd35b2913c945d8b6f0e88f840c9944&callback=?", function(data){
+                    for(var i = 0; i<data.data.length;i++){
+                        var hashtag = data.data[i];
+                        if(hashtag.location){
+                            var points = d3.geo.mercator().scale(900).translate([500, 500])([hashtag.location.longitude,hashtag.location.latitude])
+                            svg.append("svg:circle")
+                            .attr("cx", points[0])
+                            .attr("cy", points[1]).attr("r",5)
+                            .style("stroke", "rgb(178,34,34)")
+                            .style("fill","rgb(178,34,34)");
+                        }
+                    }
+                });
+            })
         }
-
-
     });
 
 
