@@ -32,7 +32,8 @@ $(document).ready(function(){
                         .data(json.features)
                         .enter()
                         .append("path")
-                        .attr("d", path);
+                        .attr("d", path)
+                        .style("stroke", "rgb(6,120,155)");
             });
             var doStuff = function(){
                 var points = d3.geo.mercator().scale(900).translate([500, 500])([-120.665606609,37.961217383])
