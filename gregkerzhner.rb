@@ -16,6 +16,11 @@ get '/countries' do
   
 end
 
+get '/instagram' do
+  content_type "application/json"
+  send_file "public/instagram.json"  
+end
+
 get '/projects' do
   content_type "application/json"
   send_file "public/works.json"
