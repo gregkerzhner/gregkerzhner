@@ -18,30 +18,32 @@ $(document).ready(function(){
             d3.json(
             "/countries",
             function (json) {
-
-    
-
-            var width = 960,height = 1160;
-
-            var svg = d3.select(".blog-main").append("svg")
-            .attr("width", width)
-            .attr("height", height);
-
-            //create geo.path object, set the projection to merator bring it to the svg-viewport
-            var path = d3.geo.path()
-                .projection(d3.geo.mercator()
-                .scale(900).translate([500, 500])
-                );
-
-            //draw svg lines of the boundries
-            svg.append("g")
-                .attr("class", "black")
-                .selectAll("path")
-                .data(json.features)
-                .enter()
-                .append("path")
-                .attr("d", path);
-            })
+                var width = 960,height = 1160;
+                svg = d3.select(".blog-main").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+                var path = d3.geo.path()
+                    .projection(d3.geo.mercator()
+                    .scale(900).translate([500, 500])
+                    );
+                svg.append("g")
+                    .attr("class", "black")
+                        .selectAll("path")
+                        .data(json.features)
+                        .enter()
+                        .append("path")
+                        .attr("d", path)
+                        .style("stroke", "rgb(6,120,155)");
+            });
+            var doStuff = function(){
+                var points = d3.geo.mercator().scale(900).translate([500, 500])([-120.665606609,37.961217383])
+                svg.append("svg:circle")
+                .attr("cx", points[0])
+                .attr("cy", points[1]).attr("r",2)
+                .style("stroke", "rgb(6,120,155)");
+            }
+            setTimeout(doStuff,300);
+       
 
 
         }
