@@ -18,7 +18,7 @@
             d3.json(
             "/countries",
             function (json) {
-                var width = 960,height = 1160;
+                var width = 960,height = 700;
                 svg = d3.select(".blog-main").append("svg")
                 .attr("width", width)
                 .attr("height", height);
@@ -34,9 +34,11 @@
                         .append("path")
                         .attr("d", path)
                         .style("stroke", "rgb(6,120,155)");
+                $(".blog-main").append("<div class = 'instaphoto'></div>");
             });
             $(".instagram-search-container .search").click(function(){
                 dotCounter = 0;
+                $(".instaphoto").empty();
                 svg.selectAll("circle").remove();
                 searchInstagram("https://api.instagram.com/v1/tags/"+$(".search-term").val()+"/media/recent?access_token=306225576.f59def8.ddd35b2913c945d8b6f0e88f840c9944&callback=?");
             });
@@ -54,6 +56,8 @@
                             .style("fill","rgb(178,34,34)")
                             .attr("thing",hashtag.images.standard_resolution.url)
                             .on("click", function(d,i) {
+                                $(".instaphoto").empty();
+                                $(".instaphoto").append("<img src ='"+this.attributes.thing.nodeValue+"'></img>")
                                 console.log(this.attributes.thing);
 
                             });

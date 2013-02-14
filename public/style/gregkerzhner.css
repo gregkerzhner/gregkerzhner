@@ -226,3 +226,8 @@ a{
 	float: left;
 	margin-top: 30px;
 }
+.instaphoto{
+	width: 600px;
+	height: 600px;
+	float: right;
+}
