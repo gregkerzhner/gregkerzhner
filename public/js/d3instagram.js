@@ -11,7 +11,6 @@
         render: function(){
             var svg;
             var dotCounter = 0;
-            var that = this;
             $(this.el).empty();
             $(this.el).append(this.template());
             $(".blog-main").width("1500px");
@@ -35,6 +34,7 @@
                         .attr("d", path)
                         .style("stroke", "rgb(6,120,155)");
                 $(".blog-main").append("<div class = 'instaphoto'></div>");
+                $(".blog-main").append($("#instagram-about-template").html());
             });
             var photoShown = false;
             $(".instagram-search-container .search").click(function(){
@@ -58,7 +58,7 @@
                             var points = d3.geo.mercator().scale(900).translate([500, 500])([hashtag.location.longitude,hashtag.location.latitude])
                             svg.append("svg:circle")
                             .attr("cx", points[0])
-                            .attr("cy", points[1]).attr("r",5)
+                            .attr("cy", points[1]).attr("r",4)
                             .style("stroke", "rgb(178,34,34)")
                             .style("fill","rgb(178,34,34)")
                             .attr("thing",hashtag.images.standard_resolution.url)
@@ -66,8 +66,6 @@
                                 photoShown = true;
                                 $(".instaphoto").empty();
                                 $(".instaphoto").append("<img src ='"+this.attributes.thing.nodeValue+"'></img>")
-                                console.log(this.attributes.thing);
-
                             });
                         }
                     }
