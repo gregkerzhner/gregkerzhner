@@ -13,7 +13,8 @@
             var dotCounter = 0;
             $(this.el).empty();
             $(this.el).append(this.template());
-            $(".blog-main").width("1400px");
+            $(".blog-main").width("1500px");
+            $("#main").width("1700px");
             d3.json(
             "/countries",
             function (json) {
