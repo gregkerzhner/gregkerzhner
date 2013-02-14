@@ -51,7 +51,12 @@
                             .attr("cx", points[0])
                             .attr("cy", points[1]).attr("r",5)
                             .style("stroke", "rgb(178,34,34)")
-                            .style("fill","rgb(178,34,34)");
+                            .style("fill","rgb(178,34,34)")
+                            .attr("thing",hashtag.images.standard_resolution.url)
+                            .on("click", function(d,i) {
+                                console.log(this.attributes.thing);
+
+                            });
                         }
                     }
                     if(dotCounter<100 && data.pagination.next_url){
