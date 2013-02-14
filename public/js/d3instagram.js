@@ -48,7 +48,10 @@
                 $.getJSON(url, function(data){
                     if(!photoShown){
                         $(".instaphoto").empty();
-                        $(".instaphoto").append("<img src ='"+data.data[0].images.standard_resolution.url+"'></img>")
+                        $(".instaphoto").append("<img src ='"+data.data[0].images.standard_resolution.url+"'></img>");
+                        $(".instaphoto").append("</p>");
+                        $(".instaphoto").append("<span>"+data.data[0].caption.text+"</span>");
+
                         photoShown = true;
                     }
                     for(var i = 0; i<data.data.length;i++){
@@ -62,10 +65,15 @@
                             .style("stroke", "rgb(178,34,34)")
                             .style("fill","rgb(178,34,34)")
                             .attr("thing",hashtag.images.standard_resolution.url)
+                            .attr("caption",hashtag.caption.text)
+                            .attr("user",hashtag.user.full_name)
                             .on("click", function(d,i) {
                                 photoShown = true;
                                 $(".instaphoto").empty();
-                                $(".instaphoto").append("<img src ='"+this.attributes.thing.nodeValue+"'></img>")
+                                $(".instaphoto").append("<img src ='"+this.attributes.thing.nodeValue+"'></img>");
+                                $(".instaphoto").append("</p>");
+                                $(".instaphoto").append("<span>"+this.attributes.caption.nodeValue+"</span>");
+            
                             });
                         }
                     }
