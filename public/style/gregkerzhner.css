@@ -57,8 +57,8 @@ body{
 	margin-top: 20px;
 }
 .blog-nav{
-	width: 15%;
-	min-width: 100px;
+	width: 10%;
+	min-width: 50px;
 	height: 100%;	
 	float: left;
 	padding-left: 10px;
@@ -227,7 +227,21 @@ a{
 	margin-top: 30px;
 }
 .instaphoto{
-	width: 600px;
+	width: 500px;
 	height: 600px;
 	float: right;
+	
+}
+.search-term{
+	background-color: black;
+	height: 30px;
+	color: white;
+	border: 1px solid #C76245;
+	font-size: 20px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.search{
+	height: 30px;
+	font-size: 20px;
 }

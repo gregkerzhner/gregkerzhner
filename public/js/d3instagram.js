@@ -14,7 +14,7 @@
             var that = this;
             $(this.el).empty();
             $(this.el).append(this.template());
-
+            $(".blog-main").width("1500px");
             d3.json(
             "/countries",
             function (json) {
@@ -36,7 +36,9 @@
                         .style("stroke", "rgb(6,120,155)");
                 $(".blog-main").append("<div class = 'instaphoto'></div>");
             });
+            var photoShown = false;
             $(".instagram-search-container .search").click(function(){
+                photoShown = false;
                 dotCounter = 0;
                 $(".instaphoto").empty();
                 svg.selectAll("circle").remove();
@@ -44,6 +46,11 @@
             });
             var searchInstagram = function(url){                
                 $.getJSON(url, function(data){
+                    if(!photoShown){
+                        $(".instaphoto").empty();
+                        $(".instaphoto").append("<img src ='"+data.data[0].images.standard_resolution.url+"'></img>")
+                        photoShown = true;
+                    }
                     for(var i = 0; i<data.data.length;i++){
                         var hashtag = data.data[i];
                         if(hashtag.location && hashtag.location.longitude && hashtag.location.latitude){
@@ -56,6 +63,7 @@
                             .style("fill","rgb(178,34,34)")
                             .attr("thing",hashtag.images.standard_resolution.url)
                             .on("click", function(d,i) {
+                                photoShown = true;
                                 $(".instaphoto").empty();
                                 $(".instaphoto").append("<img src ='"+this.attributes.thing.nodeValue+"'></img>")
                                 console.log(this.attributes.thing);
