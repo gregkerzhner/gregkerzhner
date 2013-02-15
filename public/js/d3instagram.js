@@ -36,6 +36,7 @@
                         .style("stroke", "rgb(6,120,155)");
                 $(".blog-main").append("<div class = 'instaphoto'></div>");
                 $(".blog-main").append($("#instagram-about-template").html());
+                $(".nav-menu").width("1700px");
             });
             var photoShown = false;
             $(".instagram-search-container .search").click(function(){
