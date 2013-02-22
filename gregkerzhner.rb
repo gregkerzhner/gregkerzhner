@@ -1,5 +1,19 @@
-
 require 'sinatra'
+require 'rubygems'
+require 'datamapper' 
+require 'net/http'
+
+DataMapper.setup(:default, 'postgres://grisha @localhost/gregkerzhner')
+
+class JensCounter
+  include DataMapper::Resource
+  property :id,                 Serial
+  property :count_type, String  
+  property :count,      Integer  
+  property :count_date, DateTime
+end
+
+DataMapper.auto_upgrade!
 get '/' do
   send_file "public/index.html"
 end
@@ -24,4 +38,24 @@ end
 get '/projects' do
   content_type "application/json"
   send_file "public/works.json"
+end
+
+get '/jenscounter' do
+  JensCounter.all.to_json
+end
+
+get '/stuff' do
+  content_type "application/json"
+  JensCounter.destroy()
+  url = URI.parse('http://www.8a.nu/news/AllNews.aspx')
+  req = Net::HTTP::Get.new(url.path)
+  res = Net::HTTP.start(url.host, url.port) {|http|
+    http.request(req)
+  }
+  ondra_count = res.body.scan(/Ondra/).length 
+  jens_counter = JensCounter.new
+  jens_counter.attributes = {count_type: "Ondra", count: ondra_count, count_date: Time.now}
+  jens_counter.save
+
+  JensCounter.first.to_json
 end
