@@ -1,9 +1,22 @@
 window.JensCounter = Backbone.Model.extend({
-
+    d3DataPoint:function(){
+        var date = this.get("count_date");
+        return {count_date: date.substring(0,date.indexOf("T")), count: this.get("count")}
+    }
 });
 window.Jenses = Backbone.Collection.extend({
     model: JensCounter,
-    url: "/jenscounter"
+    url: "/jenscounter",
+    byType: function(count_type) {
+        filtered = this.filter(function(jensCount) {
+            return jensCount.get("count_type") === count_type;
+        });
+        var d3DataPoints = [];
+        for(var i = 0; i<filtered.length;i++){
+            d3DataPoints.push(filtered[i].d3DataPoint());
+        }
+        return d3DataPoints;
+    }
 });
 window.jenses = new Jenses();
 jenses.fetch();
@@ -22,12 +35,8 @@ $(document).ready(function(){
             $(this.el).empty();
             $(this.el).append(this.template());
 
-            var data = [{count_date: "2013-02-19", count: "17"},
-            {count_date: "2013-02-20", count: "18"},
-            {count_date: "2013-02-21", count: "15"},
-            {count_date: "2013-02-22", count: "20"},
-            {count_date: "2013-02-23", count: "22"},
-            {count_date: "2013-02-24", count: "45"}];
+            var data = window.jenses.byType("Ondra");
+            console.log(data);
 
             var margin = {top: 20, right: 20, bottom: 30, left: 50},
                 width = 700 - margin.left - margin.right,
@@ -36,8 +45,8 @@ $(document).ready(function(){
                                     .attr("width", width)
                                     .attr("height", height)
                                     .attr("color","black");
-            var x = d3.time.scale().range([0, width]);
-            var y = d3.scale.linear().range([height, 0]);
+            var x = d3.time.scale().range([30, width]);
+            var y = d3.scale.linear().range([height-20, 0]);
 
             var xAxis = d3.svg.axis().scale(x).orient("bottom");
             var yAxis = d3.svg.axis().scale(y).orient("left");
@@ -57,18 +66,13 @@ $(document).ready(function(){
 
             svg.append("g")
                 .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
+                .attr("transform", "translate(0," + (height-20) + ")")
                 .call(xAxis);
 
-            svg.append("g")
-              .attr("class", "y axis")
-              .call(yAxis)
-              .append("text")
-              .attr("transform", "rotate(-90)")
-              .attr("y", 6)
-              .attr("dy", ".71em")
-              .style("text-anchor", "end")
-              .text("Count");
+             svg.append("g")         // Add the Y Axis
+                .attr("class", "y axis")
+                .attr("transform","translate(40,0)")
+                .call(yAxis);
 
             svg.append("path")
                 .datum(data)

@@ -249,11 +249,14 @@ a{
 .about-instagram{
 	width: 800px;
 }
+.jens-header{
+	margin: 20px 0px 0px 30px;
+}
 .jens-dashboard{
 	height: 100%;
 }
 .ondra-counter{
-	margin: 20px;
+	margin: 40px;
 	
 }
 
