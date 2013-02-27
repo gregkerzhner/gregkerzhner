@@ -41,12 +41,7 @@ get '/projects' do
 end
 
 get '/jenscounter' do
-  JensCounter.all.to_json
-end
-
-get '/stuff' do
   content_type "application/json"
-  #JensCounter.destroy()
   url = URI.parse('http://www.8a.nu/news/AllNews.aspx')
   req = Net::HTTP::Get.new(url.path)
   res = Net::HTTP.start(url.host, url.port) {|http|
@@ -57,5 +52,10 @@ get '/stuff' do
   jens_counter.attributes = {count_type: "Ondra", count: ondra_count, count_date: Time.now}
   jens_counter.save
 
+  record_count = res.body.scan(/record/).length 
+  jens_counter = JensCounter.new
+  jens_counter.attributes = {count_type: "Record", count:record_count, count_date: Time.now}
+  jens_counter.save
   JensCounter.all.to_json
 end
+

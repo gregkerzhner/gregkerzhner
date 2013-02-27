@@ -19,22 +19,30 @@ window.Jenses = Backbone.Collection.extend({
     }
 });
 window.jenses = new Jenses();
-jenses.fetch();
+jenses.fetch({
+    success: function(m,r){
+          console.log("success");
+          console.log(r); // => 2 (collection have been populated)
+    }
+});
 
 $(document).ready(function(){
     window.JensView = Backbone.View.extend({
         el: "#main",
-        collection: window.jens,
+        collection: window.jenses,
         initialize: function(){
             _.bindAll(this, 'render');
             this.template = _.template($("#jens-template").html());
+            this.collection.bind("reset", _.bind(this.drawGraph, this));
             this.render();
         },
         render: function(){
-            var x, y, width, height, data;
             $(this.el).empty();
             $(this.el).append(this.template());
-
+            return this;
+        },
+        drawGraph:function(){
+            var x, y, width, height, data;
             var data = window.jenses.byType("Ondra");
             console.log(data);
 
@@ -78,7 +86,6 @@ $(document).ready(function(){
                 .datum(data)
                 .attr("class", "line")
                .attr("d", line);
-            return this;
         }
     });
 });

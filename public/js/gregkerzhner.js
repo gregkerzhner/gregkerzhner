@@ -10,17 +10,9 @@ window.Blogs = Backbone.Collection.extend({
 	current: 1
 });
 window.blogs = new Blogs();
-blogs.fetch({
-	success: function(m,r){
-          console.log("success");
-          console.log(r); // => 2 (collection have been populated)
-    },
-	error: function(m,r){
-	console.log("error");
-    console.log(r.responseText);
-}});
+blogs.fetch();
 
- window.Project = Backbone.Model.extend({
+window.Project = Backbone.Model.extend({
 
 
 });
