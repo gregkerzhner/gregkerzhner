@@ -60,32 +60,54 @@ $(document).ready(function(){
             var yAxis = d3.svg.axis().scale(y).orient("left");
 
             var parseDate = d3.time.format("%Y-%m-%d").parse;
-
-            data.forEach(function(d) {
-                d.date = parseDate(d.count_date);
+            data = window.jenses.models.map( function (d) {
+                return { 
+                    count: d.attributes.count,
+                    date: parseDate(d.attributes.count_date.substring(0,d.attributes.count_date.indexOf("T"))),
+                    count_type: d.attributes.count_type
+                }; 
             });
 
-            x.domain(d3.extent(data, function(d) { return d.date; }));          
-            y.domain(d3.extent(data, function(d) { return d.count; }));
+            var jensCounts = d3.nest().key(function(d) { return d.count_type; }).entries(data);
 
+            x.domain(d3.extent(data, function(d) { return d.date; }));          
+            y.domain([
+                d3.min(jensCounts, function(c) { return d3.min(c.values, function(v) { return v.count; }); }),
+                d3.max(jensCounts, function(c) { return d3.max(c.values, function(v) { return v.count; }); })
+            ]);
+            var color = d3.scale.category10()
+                .domain(d3.keys(data[0]).filter(function(key) { return key === "count_type"; }));
             var line = d3.svg.line()
                 .x(function(d) { return x(d.date); })
                 .y(function(d) { return y(d.count); });
+            var jensCount = svg.selectAll(".jens-count")
+                .data(jensCounts)
+                .enter().append("g")
+                .attr("class", "jens-count");
+
+            jensCount.append("path")
+                .attr("class", "line")
+                .attr("d", function(d) { return line(d.values); })
+                .style("stroke", function(d) { return color(d.key); });
+
+            jensCount.append("text")
+                .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+                .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.patients) + ")"; })
+                .attr("x", 3)
+                .attr("dy", ".35em")
+                .text(function(d) { return d.value.count_type; });
+         
 
             svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + (height-20) + ")")
                 .call(xAxis);
 
-             svg.append("g")         // Add the Y Axis
+             svg.append("g")   
                 .attr("class", "y axis")
                 .attr("transform","translate(40,0)")
                 .call(yAxis);
 
-            svg.append("path")
-                .datum(data)
-                .attr("class", "line")
-               .attr("d", line);
         }
     });
 });
