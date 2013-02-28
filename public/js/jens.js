@@ -46,15 +46,15 @@ $(document).ready(function(){
             var data = window.jenses.byType("Ondra");
             console.log(data);
 
-            var margin = {top: 20, right: 20, bottom: 30, left: 50},
-                width = 700 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
+            var margin = {top: 20, right: 20, bottom: 30, left: 60},
+                width = 800 - margin.left - margin.right,
+                height = 600 - margin.top - margin.bottom;
             var svg = d3.select(".ondra-counter").append("svg")
                                     .attr("width", width)
                                     .attr("height", height)
                                     .attr("color","black");
-            var x = d3.time.scale().range([30, width]);
-            var y = d3.scale.linear().range([height-20, 0]);
+            var x = d3.time.scale().range([margin.right, width-margin.left]);
+            var y = d3.scale.linear().range([height-margin.bottom, 0]);
 
             var xAxis = d3.svg.axis().scale(x).orient("bottom");
             var yAxis = d3.svg.axis().scale(y).orient("left");
@@ -91,8 +91,10 @@ $(document).ready(function(){
                 .style("stroke", function(d) { return color(d.key); });
 
             jensCount.append("text")
-                .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-                .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.patients) + ")"; })
+                .datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
+                .attr("transform", function(d) { 
+                    console.log( ""+x(d.value.date) + ","+ y(d.value.count));
+                    return "translate(" + x(d.value.date) + "," + y(d.value.count) + ")"; })
                 .attr("x", 3)
                 .attr("dy", ".35em")
                 .text(function(d) { return d.value.count_type; });
@@ -100,13 +102,19 @@ $(document).ready(function(){
 
             svg.append("g")
                 .attr("class", "x axis")
-                .attr("transform", "translate(0," + (height-20) + ")")
+                .attr("transform", "translate(0," + (height-margin.bottom) + ")")
                 .call(xAxis);
 
              svg.append("g")   
                 .attr("class", "y axis")
                 .attr("transform","translate(40,0)")
                 .call(yAxis);
+            svg.append("text")
+                .attr("x", (width / 2))             
+                .attr("y", 0 + (margin.top))
+                .attr("text-anchor", "middle")  
+                .style("font-size", "18px")  
+                .text("Number of mentions on front page of 8a");
 
         }
     });
