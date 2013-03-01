@@ -46,7 +46,7 @@ $(document).ready(function(){
             var data = window.jenses.byType("Ondra");
             console.log(data);
 
-            var margin = {top: 20, right: 20, bottom: 30, left: 60},
+            var margin = {top: 50, right: 20, bottom: 30, left: 60},
                 width = 800 - margin.left - margin.right,
                 height = 600 - margin.top - margin.bottom;
             var svg = d3.select(".ondra-counter").append("svg")
@@ -54,7 +54,7 @@ $(document).ready(function(){
                                     .attr("height", height)
                                     .attr("color","black");
             var x = d3.time.scale().range([margin.right, width-margin.left]);
-            var y = d3.scale.linear().range([height-margin.bottom, 0]);
+            var y = d3.scale.linear().range([height-margin.bottom, margin.top]);
 
             var xAxis = d3.svg.axis().scale(x).orient("bottom");
             var yAxis = d3.svg.axis().scale(y).orient("left");
@@ -102,7 +102,7 @@ $(document).ready(function(){
 
             svg.append("g")
                 .attr("class", "x axis")
-                .attr("transform", "translate(0," + (height-margin.bottom) + ")")
+                .attr("transform", "translate("+margin.top+"," + (height-margin.bottom) + ")")
                 .call(xAxis);
 
              svg.append("g")   
