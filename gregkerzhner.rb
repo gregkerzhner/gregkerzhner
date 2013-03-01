@@ -1,9 +1,9 @@
 require 'sinatra'
 require 'rubygems'
-require 'datamapper' 
+require 'data_mapper' 
 require 'net/http'
 
-DataMapper.setup(:default, 'postgres://grisha @localhost/gregkerzhner')
+DataMapper.setup(:default, ENV['DATABASE_URL'])
 
 class JensCounter
   include DataMapper::Resource
