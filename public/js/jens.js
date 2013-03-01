@@ -19,12 +19,6 @@ window.Jenses = Backbone.Collection.extend({
     }
 });
 window.jenses = new Jenses();
-jenses.fetch({
-    success: function(m,r){
-          console.log("success");
-          console.log(r); // => 2 (collection have been populated)
-    }
-});
 
 $(document).ready(function(){
     window.JensView = Backbone.View.extend({
@@ -39,6 +33,12 @@ $(document).ready(function(){
         render: function(){
             $(this.el).empty();
             $(this.el).append(this.template());
+            jenses.fetch({
+    success: function(m,r){
+          console.log("success");
+          console.log(r); // => 2 (collection have been populated)
+    }
+});
             return this;
         },
         drawGraph:function(){
