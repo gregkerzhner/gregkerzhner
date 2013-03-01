@@ -3,7 +3,7 @@ require 'rubygems'
 require 'data_mapper' 
 require 'net/http'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'])
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://grisha @localhost/gregkerzhner')
 
 class JensCounter
   include DataMapper::Resource

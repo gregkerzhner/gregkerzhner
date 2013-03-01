@@ -263,15 +263,16 @@ a{
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: white;
   shape-rendering: crispEdges;
 }
 
+svg text{
+  shape-rendering: crispEdges;
+  stroke: white;
+}
 .line {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
-}
-.x.axis{
-	color: green;
 }

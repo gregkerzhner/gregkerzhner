@@ -46,19 +46,20 @@ $(document).ready(function(){
             var data = window.jenses.byType("Ondra");
             console.log(data);
 
-            var margin = {top: 50, right: 20, bottom: 30, left: 60},
+            var margin = {top: 60, right: 60, bottom: 30, left: 60},
                 width = 800 - margin.left - margin.right,
                 height = 600 - margin.top - margin.bottom;
             var svg = d3.select(".ondra-counter").append("svg")
-                                    .attr("width", width)
-                                    .attr("height", height)
-                                    .attr("color","black");
-            var x = d3.time.scale().range([margin.right, width-margin.left]);
-            var y = d3.scale.linear().range([height-margin.bottom, margin.top]);
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            var x = d3.time.scale().range([0, width]);
+            var y = d3.scale.linear().range([height, 0]);
 
             var xAxis = d3.svg.axis().scale(x).orient("bottom");
             var yAxis = d3.svg.axis().scale(y).orient("left");
-
+            xAxis.ticks(d3.time.days, 1);
             var parseDate = d3.time.format("%Y-%m-%d").parse;
             data = window.jenses.models.map( function (d) {
                 return { 
@@ -102,19 +103,18 @@ $(document).ready(function(){
 
             svg.append("g")
                 .attr("class", "x axis")
-                .attr("transform", "translate("+margin.top+"," + (height-margin.bottom) + ")")
-                .call(xAxis);
+                .attr("transform", "translate("+0+"," + height + ")")
+                   .call(xAxis);
 
              svg.append("g")   
                 .attr("class", "y axis")
-                .attr("transform","translate(40,0)")
                 .call(yAxis);
             svg.append("text")
                 .attr("x", (width / 2))             
-                .attr("y", 0 + (margin.top))
+                .attr("y", 0)
                 .attr("text-anchor", "middle")  
                 .style("font-size", "18px")  
-                .text("Number of mentions on front page of 8a");
+                .text("Mentions of Adam Ondra and World Record on front page of 8a.nu");
 
         }
     });
