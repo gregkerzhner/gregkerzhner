@@ -42,6 +42,7 @@ $(document).ready(function(){
             return this;
         },
         drawGraph:function(){
+            $(".loader").hide();
             var x, y, width, height, data;
             var data = window.jenses.byType("Ondra");
             console.log(data);
