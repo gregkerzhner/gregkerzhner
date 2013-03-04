@@ -42,21 +42,25 @@ end
 
 get '/jenscounter' do
   content_type "application/json"
-  url = URI.parse('http://www.8a.nu/news/AllNews.aspx')
-  req = Net::HTTP::Get.new(url.path)
-  res = Net::HTTP.start(url.host, url.port) {|http|
-    http.request(req)
-  }
-  ondra_count = res.body.scan(/Ondra/).length 
-  jens_counter = JensCounter.new
-  jens_counter.attributes = {count_type: "Ondra", count: ondra_count, count_date: Time.now}
-  jens_counter.save
 
-  record_count = res.body.scan(/record/).length 
-  jens_counter = JensCounter.new
-  jens_counter.attributes = {count_type: "Record", count:record_count, count_date: Time.now}
-  jens_counter.save
-  
+  if JensCounter.all(:count_date.gt => DateTime.new(DateTime.now.year, DateTime.now.month, DateTime.now.day, 0, 0, 0, 0)).length == 0
+
+    url = URI.parse('http://www.8a.nu/news/AllNews.aspx')
+    req = Net::HTTP::Get.new(url.path)
+    res = Net::HTTP.start(url.host, url.port) {|http|
+      http.request(req)
+    }
+    ondra_count = res.body.scan(/Ondra/).length 
+    jens_counter = JensCounter.new
+    jens_counter.attributes = {count_type: "Ondra", count: ondra_count, count_date: Time.now}
+    jens_counter.save
+
+    record_count = res.body.scan(/record/).length 
+    jens_counter = JensCounter.new
+    jens_counter.attributes = {count_type: "Record", count:record_count, count_date: Time.now}
+    jens_counter.save
+
+  end
   JensCounter.all.to_json
 end
 
