@@ -54,12 +54,6 @@ get '/jenscounter' do
     jens_counter = JensCounter.new
     jens_counter.attributes = {count_type: "Ondra", count: ondra_count, count_date: Time.now}
     jens_counter.save
-
-    record_count = res.body.scan(/record/).length 
-    jens_counter = JensCounter.new
-    jens_counter.attributes = {count_type: "Record", count:record_count, count_date: Time.now}
-    jens_counter.save
-
   end
   JensCounter.all.to_json
 end

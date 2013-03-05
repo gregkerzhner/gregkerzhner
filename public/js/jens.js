@@ -115,7 +115,9 @@ $(document).ready(function(){
                 .attr("y", 0)
                 .attr("text-anchor", "middle")  
                 .style("font-size", "18px")  
-                .text("Mentions of Adam Ondra and World Record on front page of 8a.nu");
+                .text("Mentions of Adam Ondra on the page of 8a.nu over time.");
+
+
 
         }
     });
