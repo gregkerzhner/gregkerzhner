@@ -18,28 +18,37 @@ window.Jenses = Backbone.Collection.extend({
         return d3DataPoints;
     }
 });
-window.jenses = new Jenses();
+window.Rank = Backbone.Model.extend({
 
+})
+window.Ranks = Backbone.Collection.extend({
+    model: Rank,
+    url: "/jensrank"
+})
+window.jenses = new Jenses();
+window.ranks = new Ranks();
 $(document).ready(function(){
     window.JensView = Backbone.View.extend({
         el: "#main",
         collection: window.jenses,
+        rankings: window.ranks,
         initialize: function(){
             _.bindAll(this, 'render');
             this.template = _.template($("#jens-template").html());
             this.collection.bind("reset", _.bind(this.drawGraph, this));
+            this.rankings.bind("reset",  _.bind(this.drawRanking, this))
             this.render();
         },
         render: function(){
             $(this.el).empty();
             $(this.el).append(this.template());
-            jenses.fetch({
-    success: function(m,r){
-          console.log("success");
-          console.log(r); // => 2 (collection have been populated)
-    }
-});
+            jenses.fetch();
+            ranks.fetch();
             return this;
+        },
+
+        drawRanking: function(){
+            console.log("drawing ranknigs");
         },
         drawGraph:function(){
             $(".loader").hide();
@@ -116,8 +125,6 @@ $(document).ready(function(){
                 .attr("text-anchor", "middle")  
                 .style("font-size", "18px")  
                 .text("Mentions of Adam Ondra on the page of 8a.nu over time.");
-
-
 
         }
     });

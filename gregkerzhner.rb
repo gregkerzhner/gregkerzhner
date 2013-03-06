@@ -2,6 +2,8 @@ require 'sinatra'
 require 'rubygems'
 require 'data_mapper' 
 require 'net/http'
+require 'nokogiri'
+require 'open-uri'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://grisha @localhost/gregkerzhner')
 
@@ -11,6 +13,15 @@ class JensCounter
   property :count_type, String  
   property :count,      Integer  
   property :count_date, DateTime
+end
+
+class JensRank
+  include DataMapper::Resource
+  property :id,                 Serial
+  property :name, String  
+  property :rank,      Integer  
+  property :date, Date
+  property :points, Integer
 end
 
 DataMapper.auto_upgrade!
@@ -58,3 +69,17 @@ get '/jenscounter' do
   JensCounter.all.to_json
 end
 
+get '/jensrank' do
+  if JensRank.all(:date => Date.today).length == 0
+    url = URI.parse('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA')
+    doc = Nokogiri::HTML(open('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA'))
+    rows = doc.xpath('//*[@id="GridViewRankingRoute"]/tr')
+    rows.each do |row|
+      if (row.at_xpath("td[1]") and row.at_xpath("td[5]") and row.at_xpath("td[1]").text.to_i < 21)
+        puts row.at_xpath("td[1]").text + " : "+ row.at_xpath("td[5]").text + " : "+ row.at_xpath("td[3]").text
+        JensRank.create(name: row.at_xpath("td[5]").text, rank: row.at_xpath("td[1]").text, date: Date.today, points: row.at_xpath("td[3]").text.gsub(/\p{^Alnum}/, '').to_i)
+      end
+    end
+  end
+  JensRank.all.to_json
+end
