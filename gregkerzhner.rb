@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'sinatra'
 require 'rubygems'
 require 'data_mapper' 
@@ -5,7 +6,7 @@ require 'net/http'
 require 'nokogiri'
 require 'open-uri'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://grisha @localhost/gregkerzhner')
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://greg @localhost/greg')
 
 class JensCounter
   include DataMapper::Resource
@@ -70,6 +71,7 @@ get '/jenscounter' do
 end
 
 get '/jensrank' do
+
   if JensRank.all(:date => Date.today).length == 0
     url = URI.parse('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA')
     doc = Nokogiri::HTML(open('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA'))

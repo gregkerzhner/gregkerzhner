@@ -48,8 +48,100 @@ $(document).ready(function(){
         },
 
         drawRanking: function(){
-            console.log("drawing ranknigs");
+                      $(".loader").hide();
+            var x, y, width, height, data;
+            var margin = {top: 60, right: 150, bottom: 30, left: 60},
+                width = 800 - margin.left - margin.right,
+                height = 600 - margin.top - margin.bottom;
+            var svg = d3.select(".ondra-counter").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            var x = d3.time.scale().range([0, width]);
+            var y = d3.scale.linear().range([height, 0]);
+
+            var xAxis = d3.svg.axis().scale(x).orient("bottom");
+            var yAxis = d3.svg.axis().scale(y).orient("left");
+            xAxis.ticks(d3.time.days, 1);
+            var parseDate = d3.time.format("%Y-%m-%d").parse;
+            data = window.ranks.models.map( function (d) {
+                return { 
+                    rank: d.attributes.rank,
+                    date: parseDate(d.attributes.date),                    
+                    name: d.attributes.name,
+                    points: d.attributes.points
+                }; 
+            });
+            var jensCounts = d3.nest().key(function(d) { return d.name; }).entries(data);
+            x.domain(d3.extent(data, function(d) { return d.date; }));          
+            y.domain([
+                d3.min(jensCounts, function(c) { return d3.min(c.values, function(v) { return v.rank; }); }),
+                d3.max(jensCounts, function(c) { return d3.max(c.values, function(v) { return v.rank; }); })
+            ]);
+            var color = d3.scale.category10()
+                .domain(d3.keys(data[0]).filter(function(key) { return key === "name"; }));
+            var line = d3.svg.line()
+                .x(function(d) { return x(d.date); })
+                .y(function(d) { return y(d.rank); });
+                
+            var jensCount = svg.selectAll(".jens-count")
+                .data(jensCounts)
+                .enter().append("g")
+                .attr("class", "jens-count");
+
+            jensCount.append("path")
+                .attr("class", "line")
+                .attr("d", function(d) {
+                 console.log(d);
+                 return line(d.values); })
+                .style("stroke", function(d) { return color(d.key); });
+
+            jensCount.append("text")
+                .datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
+                .attr("transform", function(d) { 
+                    console.log( ""+x(d.value.date) + ","+ y(d.value.rank));
+                    return "translate(" + x(d.value.date) + "," + y(d.value.rank) + ")"; })
+                .attr("x", 3)
+                .attr("dy", ".35em")
+                .text(function(d) { return d.value.name; });
+         
+
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate("+0+"," + height + ")")
+                   .call(xAxis);
+
+             svg.append("g")   
+                .attr("class", "y axis")
+                .call(yAxis);
         },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         drawGraph:function(){
             $(".loader").hide();
             var x, y, width, height, data;
@@ -78,7 +170,6 @@ $(document).ready(function(){
                     count_type: d.attributes.count_type
                 }; 
             });
-
             var jensCounts = d3.nest().key(function(d) { return d.count_type; }).entries(data);
 
             x.domain(d3.extent(data, function(d) { return d.date; }));          
