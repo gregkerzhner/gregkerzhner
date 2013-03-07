@@ -63,11 +63,12 @@ $(document).ready(function(){
 
             var xAxis = d3.svg.axis().scale(x).orient("bottom");
             var yAxis = d3.svg.axis().scale(y).orient("left");
+      
             xAxis.ticks(d3.time.days, 1);
             var parseDate = d3.time.format("%Y-%m-%d").parse;
             data = window.ranks.models.map( function (d) {
                 return { 
-                    rank: d.attributes.rank,
+                    rank: 20-d.attributes.rank,
                     date: parseDate(d.attributes.date),                    
                     name: d.attributes.name,
                     points: d.attributes.points
@@ -100,7 +101,6 @@ $(document).ready(function(){
             jensCount.append("text")
                 .datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
                 .attr("transform", function(d) { 
-                    console.log( ""+x(d.value.date) + ","+ y(d.value.rank));
                     return "translate(" + x(d.value.date) + "," + y(d.value.rank) + ")"; })
                 .attr("x", 3)
                 .attr("dy", ".35em")
