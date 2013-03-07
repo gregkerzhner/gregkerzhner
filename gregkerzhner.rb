@@ -6,7 +6,7 @@ require 'net/http'
 require 'nokogiri'
 require 'open-uri'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://greg @localhost/greg')
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://grisha @localhost/gregkerzhner')
 
 class JensCounter
   include DataMapper::Resource
