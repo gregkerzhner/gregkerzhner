@@ -71,7 +71,6 @@ get '/jenscounter' do
 end
 
 get '/jensrank' do
-
   if JensRank.all(:date => Date.today).length == 0
     url = URI.parse('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA')
     doc = Nokogiri::HTML(open('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA'))

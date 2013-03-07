@@ -63,7 +63,7 @@ $(document).ready(function(){
 
             var xAxis = d3.svg.axis().scale(x).orient("bottom");
             var yAxis = d3.svg.axis().scale(y).orient("left");
-      
+            yAxis.tickValues([]);
             xAxis.ticks(d3.time.days, 1);
             var parseDate = d3.time.format("%Y-%m-%d").parse;
             data = window.ranks.models.map( function (d) {
@@ -80,6 +80,7 @@ $(document).ready(function(){
                 d3.min(jensCounts, function(c) { return d3.min(c.values, function(v) { return v.rank; }); }),
                 d3.max(jensCounts, function(c) { return d3.max(c.values, function(v) { return v.rank; }); })
             ]);
+
             var color = d3.scale.category10()
                 .domain(d3.keys(data[0]).filter(function(key) { return key === "name"; }));
             var line = d3.svg.line()
@@ -90,21 +91,42 @@ $(document).ready(function(){
                 .data(jensCounts)
                 .enter().append("g")
                 .attr("class", "jens-count");
-
-            jensCount.append("path")
-                .attr("class", "line")
-                .attr("d", function(d) {
-                 console.log(d);
-                 return line(d.values); })
-                .style("stroke", function(d) { return color(d.key); });
-
-            jensCount.append("text")
+            var totalLength = width;
+            var namesShown;
+            var showNames = function(){
+                if(!namesShown){
+                jensCount.append("text")
                 .datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
                 .attr("transform", function(d) { 
                     return "translate(" + x(d.value.date) + "," + y(d.value.rank) + ")"; })
                 .attr("x", 3)
                 .attr("dy", ".35em")
                 .text(function(d) { return d.value.name; });
+                namesShown = true;
+                }
+            }
+            jensCount.append("path")
+                .attr("class", "line")
+                .attr("d", function(d) {
+                 console.log(d);
+                 return line(d.values); })
+                .attr("stroke-dasharray", totalLength + " " + totalLength)
+                .attr("stroke-dashoffset", totalLength)
+                .transition()
+                .each("end",showNames)
+                .duration(2000)
+                .ease("linear")
+                .attr("stroke-dashoffset", 0)
+                .style("stroke", function(d) { return color(d.key); });
+
+
+            //jensCount.append("text")
+               // .datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
+               // .attr("transform", function(d) { 
+              //      return "translate(" + x(d.value.date) + "," + y(d.value.rank) + ")"; })
+              //  .attr("x", 3)
+              //  .attr("dy", ".35em")
+              //  .text(function(d) { return d.value.name; });
          
 
             svg.append("g")
@@ -116,32 +138,6 @@ $(document).ready(function(){
                 .attr("class", "y axis")
                 .call(yAxis);
         },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         drawGraph:function(){
             $(".loader").hide();
             var x, y, width, height, data;
