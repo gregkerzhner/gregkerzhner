@@ -67,7 +67,7 @@ window.LineGraph.prototype.draw = function(){
         .data(jensCounts)
         .enter().append("g")
         .attr("class", "jens-count");
-    var totalLength = width+300;
+    var totalLength = width+700;
     var namesShown;
     var showNames = function(){
         if(!namesShown){
