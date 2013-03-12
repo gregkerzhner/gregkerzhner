@@ -30,8 +30,8 @@ window.LineGraph.prototype.draw = function(){
     var config = this.config;
     $(".loader").hide();
     var x, y, width, height, data;
-    var margin = {top: 60, right: 150, bottom: 60, left: 60},
-        width = 800 - margin.left - margin.right,
+    var margin = {top: 60, right: 250, bottom: 60, left: 60},
+        width = 900 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
     var svg = d3.select(".ondra-counter").append("svg")
         .attr("width", width + margin.left + margin.right)
