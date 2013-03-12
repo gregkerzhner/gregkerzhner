@@ -23,6 +23,7 @@ class JensRank
   property :rank,      Integer  
   property :date, Date
   property :points, Integer
+  property :type, String
 end
 
 DataMapper.auto_upgrade!
@@ -71,16 +72,25 @@ get '/jenscounter' do
 end
 
 get '/jensrank' do
-  if JensRank.all(:date => Date.today).length == 0
-    url = URI.parse('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA')
-    doc = Nokogiri::HTML(open('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA'))
-    rows = doc.xpath('//*[@id="GridViewRankingRoute"]/tr')
+  get_rank_from_8a('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA',"us_route", "GridViewRankingRoute")
+  JensRank.all(type:"us_route").to_json
+end
+
+get "/usboulder" do
+  get_rank_from_8a('http://www.8a.nu/Scorecard/Ranking.aspx?CountryCode=USA',"us_boulder", "GridViewBoulder")
+  JensRank.all(type:"us_boulder").to_json
+end
+
+def get_rank_from_8a(url,type, chart_id)
+  if JensRank.all(:date => Date.today, type: type).length == 0
+    doc = Nokogiri::HTML(open(url))
+    xpath = '//*[@id="'+chart_id+'"]/tr'
+    rows = doc.xpath(xpath)
     rows.each do |row|
       if (row.at_xpath("td[1]") and row.at_xpath("td[5]") and row.at_xpath("td[1]").text.to_i < 21)
         puts row.at_xpath("td[1]").text + " : "+ row.at_xpath("td[5]").text + " : "+ row.at_xpath("td[3]").text
-        JensRank.create(name: row.at_xpath("td[5]").text, rank: row.at_xpath("td[1]").text, date: Date.today, points: row.at_xpath("td[3]").text.gsub(/\p{^Alnum}/, '').to_i)
+        JensRank.create(type: type, name: row.at_xpath("td[5]").text, rank: row.at_xpath("td[1]").text, date: Date.today, points: row.at_xpath("td[3]").text.gsub(/\p{^Alnum}/, '').to_i)
       end
     end
   end
-  JensRank.all.to_json
 end

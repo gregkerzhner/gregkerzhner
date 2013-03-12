@@ -267,6 +267,10 @@ a{
   shape-rendering: crispEdges;
 }
 
+.ondra-counter svg{
+	background-color: #272727;
+	margin: 20px;
+}
 svg text{
   shape-rendering: crispEdges;
   stroke: white;
@@ -279,5 +283,5 @@ svg text{
 .loader{
 	width: 400px;
 	margin: 40px 200px;
-	line-height: 40px ;
+	line-height: 40px;
 }

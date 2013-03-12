@@ -16,8 +16,13 @@ window.Ranks = Backbone.Collection.extend({
     model: Rank,
     url: "/jensrank"
 })
+window.USBoulderRanks = Backbone.Collection.extend({
+    model: Rank,
+    url: "/usboulder"
+});
 window.jenses = new Jenses();
 window.ranks = new Ranks();
+window.usBoulders = new USBoulderRanks();
 window.LineGraph = function(config){
     this.config = config;    
 }
@@ -25,7 +30,7 @@ window.LineGraph.prototype.draw = function(){
     var config = this.config;
     $(".loader").hide();
     var x, y, width, height, data;
-    var margin = {top: 60, right: 150, bottom: 30, left: 60},
+    var margin = {top: 60, right: 150, bottom: 60, left: 60},
         width = 800 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
     var svg = d3.select(".ondra-counter").append("svg")
@@ -96,22 +101,24 @@ window.LineGraph.prototype.draw = function(){
         .attr("class", "y axis")
         .call(yAxis);
     svg.append("text")
-    .attr("x", (width / 2))             
-    .attr("y", 0)
-    .attr("text-anchor", "middle")  
-    .style("font-size", "18px")  
-    .text(config.title);
+        .attr("x", (width / 2))             
+        .attr("y", -20)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "18px")  
+        .text(config.title);
 }
 $(document).ready(function(){
     window.JensView = Backbone.View.extend({
         el: "#main",
         collection: window.jenses,
         rankings: window.ranks,
+        usBoulders: window.usBoulders,
         initialize: function(){
             _.bindAll(this, 'render');
             this.template = _.template($("#jens-template").html());
             this.collection.bind("reset", _.bind(this.drawJensCounter, this));
             this.rankings.bind("reset",  _.bind(this.drawRanking, this));
+            this.usBoulders.bind("reset",  _.bind(this.drawUSBoulders, this));
             this.render();
         },
         render: function(){
@@ -119,9 +126,31 @@ $(document).ready(function(){
             $(this.el).append(this.template());
             jenses.fetch();
             ranks.fetch();
+            usBoulders.fetch();
             return this;
         },
-
+        drawUSBoulders: function(){
+            $(".loader").hide();
+            var parseDate = d3.time.format("%Y-%m-%d").parse;
+            var config = {
+                graphClass: ".ondra",
+                yTickValues: [],
+                data: window.usBoulders.models.map( function (d) {
+                    return { 
+                        rank: 20-d.attributes.rank,
+                        date: parseDate(d.attributes.date),                    
+                        name: d.attributes.name,
+                        points: d.attributes.points
+                    }; 
+                }),
+                xDataPoint:"date",
+                yDataPoint:"rank",
+                name: "name",
+                title: "United States Boulder Rankings"
+            }
+            rankGraph = new window.LineGraph(config);
+            rankGraph.draw();
+        },
         drawRanking: function(){
             $(".loader").hide();
             var parseDate = d3.time.format("%Y-%m-%d").parse;
@@ -160,7 +189,7 @@ $(document).ready(function(){
                 xDataPoint:"date",
                 yDataPoint:"count",
                 name: "count_type",
-                title: "Ondra Count"
+                title: "Number of front page news articles about Adam Ondra"
             }
             rankGraph = new window.LineGraph(config);
             rankGraph.draw();
