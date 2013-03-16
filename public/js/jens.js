@@ -87,12 +87,24 @@ window.LineGraph.prototype.draw = function(){
          return line(d.values); })
         .attr("stroke-dasharray", totalLength + " " + totalLength)
         .attr("stroke-dashoffset", totalLength)
+        .on("mouseover",function(){
+            d3.select(this).style("stroke-width","5px");
+            d3.select(this).style("stroke","steelblue");
+            d = "<div class = 'tooltip' id ='curentTooltip'>Sweet info</div>";
+            $(svg).append(d);
+            $(".tooltip").css("left",event.pageX);
+            $(".tooltip").css("top",event.pageY);
+        })
+        .on("mouseout",function(){
+            d3.select(this).style("stroke-width","2px");
+            d3.select(this).style("stroke", function(d) { return color(d.key); });
+        })
         .transition()
         .each("end",showNames)
         .duration(2000)
         .ease("linear")
         .attr("stroke-dashoffset", 0)
-        .style("stroke", function(d) { return color(d.key); });
+        .style("stroke", function(d) { return color(d.key); })
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate("+0+"," + height + ")")
