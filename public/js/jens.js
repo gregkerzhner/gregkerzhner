@@ -67,7 +67,7 @@ window.LineGraph.prototype.draw = function(){
         .data(jensCounts)
         .enter().append("g")
         .attr("class", "jens-count");
-    var totalLength = width+700;
+    var totalLength = config.offset;
     var namesShown;
     var showNames = function(){
         if(!namesShown){
@@ -158,7 +158,8 @@ $(document).ready(function(){
                 xDataPoint:"date",
                 yDataPoint:"rank",
                 name: "name",
-                title: "United States Boulder Rankings"
+                title: "United States Boulder Rankings",
+                offset: 1000
             }
             rankGraph = new window.LineGraph(config);
             rankGraph.draw();
@@ -180,7 +181,8 @@ $(document).ready(function(){
                 xDataPoint:"date",
                 yDataPoint:"rank",
                 name: "name",
-                title: "United States Route Rankings"
+                title: "United States Route Rankings",
+                offset: 1000
             }
             rankGraph = new window.LineGraph(config);
             rankGraph.draw();
@@ -201,7 +203,8 @@ $(document).ready(function(){
                 xDataPoint:"date",
                 yDataPoint:"count",
                 name: "count_type",
-                title: "Number of front page news articles about Adam Ondra"
+                title: "Number of front page news articles about Adam Ondra",
+                offset: 1500
             }
             rankGraph = new window.LineGraph(config);
             rankGraph.draw();
