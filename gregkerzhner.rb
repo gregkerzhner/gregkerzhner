@@ -53,6 +53,11 @@ get '/projects' do
   send_file "public/works.json"
 end
 
+get '/intro' do
+  content_type "application/json"
+  send_file "public/intro.json"
+end
+
 get '/jenscounter' do
   content_type "application/json"
 
