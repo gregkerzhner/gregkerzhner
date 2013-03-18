@@ -12,10 +12,7 @@ window.Blogs = Backbone.Collection.extend({
 window.blogs = new Blogs();
 blogs.fetch();
 
-window.Project = Backbone.Model.extend({
-
-
-});
+window.Project = Backbone.Model.extend();
 
 window.Projects = Backbone.Collection.extend({
 	model: Project,
@@ -23,15 +20,7 @@ window.Projects = Backbone.Collection.extend({
 	
 });
 window.projects = new Projects();
-projects.fetch({
-	success: function(m,r){
-          console.log("success");
-          console.log(r); // => 2 (collection have been populated)
-    },
-	error: function(m,r){
-	console.log("error");
-    console.log(r.responseText);
-}});
+projects.fetch();
 $(document).ready(function(){	
    $.ajax({
          url:    '/intro',
