@@ -30,6 +30,17 @@ DataMapper.auto_upgrade!
 get '/' do
   send_file "public/index.html"
 end
+get '/jensmonitor' do
+  send_file "public/index.html"
+end
+
+get '/blog' do
+  send_file "public/index.html"
+end
+
+get '/clients' do
+  send_file "public/index.html"
+end
 
 get '/blogs' do
   content_type "application/json"

@@ -30,7 +30,7 @@ $(document).ready(function(){
          async:   false
     });  
    	console.log("after")
-	window.navMenuSeed = [{id: 1, title: "home"},{id: 2,title: "blog"},{id: 3,title: "projects"},{id: 4,title: "jensmonitor"}];
+	window.navMenuSeed = [{id: 1, title: "home"},{id: 2,title: "blog"},{id: 3,title: "clients"},{id: 4,title: "jensmonitor"}];
 	fabric.RotatingSquare = fabric.util.createClass(fabric.Rect, {
 	    type: 'RotatingSquare',
 
@@ -228,7 +228,7 @@ $(document).ready(function(){
 			this.render();
 		},
 		render: function(){
-		  $(this.el).empty();
+		  	$(this.el).empty();
 			$(this.el).append(this.template());
 			return this;
 		}
@@ -239,7 +239,7 @@ $(document).ready(function(){
 			if(this.get("title")==="blog"){
 			  new BlogView();
 			}
-			else if(this.get("title") === "projects"){				
+			else if(this.get("title") === "clients"){				
 				new PortfolioView();
 			}
 			
@@ -294,24 +294,25 @@ $(document).ready(function(){
 		}
 	});
 	window.Gregkerzhner = Backbone.Router.extend({
-	routes: {
-	    '': 'home',	
-	    'blog':  'home',
-	    'projects': 'home' , 
-	    'jensmonitor': 'home'  
-	},
+		routes: {
+	    	'': 'home',	
+	    	'blog':  'home',
+	    	'clients': 'home' , 
+	    	'jensmonitor': 'home'  
+		},
 
-	initialize: function() {
-	  intro = new Intro();
-	  this.introView = new IntroView({model: intro});
-	 },
-	 home: function(){
-	 	$("canvas").html(this.introView.render().el);
-    	$(".canvas-container").css("margin", "0 auto");	 	
-		}
+		initialize: function() {
+	  		intro = new Intro();
+	  		this.introView = new IntroView({model: intro});
+	 	},
+
+	 	home: function(){
+	 		$("canvas").html(this.introView.render().el);
+    		$(".canvas-container").css("margin", "0 auto");	 	
+		}	 
 	 }
 	 );	
 	window.App = new Gregkerzhner();
-    Backbone.history.start();
+    Backbone.history.start({pushState: true});
 });
 
