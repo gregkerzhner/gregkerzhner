@@ -46,7 +46,7 @@ window.LineGraph.prototype.draw = function(){
     if(config.yTickValues){
         yAxis.tickValues(config.yTickValues);
     }
-    xAxis.ticks(d3.time.days, 3);
+    xAxis.ticks(d3.time.months, 5);
     var parseDate = d3.time.format("%Y-%m-%d").parse;
     data = config.data;
     console.log(data);
@@ -204,7 +204,7 @@ $(document).ready(function(){
                 yDataPoint:"count",
                 name: "count_type",
                 title: "Number of front page news articles about Adam Ondra",
-                offset: 1500
+                offset: 10000
             }
             rankGraph = new window.LineGraph(config);
             rankGraph.draw();
