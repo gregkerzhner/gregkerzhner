@@ -5,7 +5,6 @@
   require 'net/http'
   require 'nokogiri'
   require 'open-uri'
-  require 'pry'
 
   DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://grisha @localhost/gregkerzhner')
 
