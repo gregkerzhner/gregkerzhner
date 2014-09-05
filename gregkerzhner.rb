@@ -1,30 +1,31 @@
-# encoding: utf-8
-require 'sinatra'
-require 'rubygems'
-require 'data_mapper' 
-require 'net/http'
-require 'nokogiri'
-require 'open-uri'
+  # encoding: utf-8
+  require 'sinatra'
+  require 'rubygems'
+  require 'data_mapper' 
+  require 'net/http'
+  require 'nokogiri'
+  require 'open-uri'
+  require 'pry'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://grisha @localhost/gregkerzhner')
+  DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://grisha @localhost/gregkerzhner')
 
-class JensCounter
-  include DataMapper::Resource
-  property :id,                 Serial
-  property :count_type, String  
-  property :count,      Integer  
-  property :count_date, DateTime
-end
+  class JensCounter
+    include DataMapper::Resource
+    property :id,                 Serial
+    property :count_type, String  
+    property :count,      Integer  
+    property :count_date, DateTime
+  end
 
-class JensRank
-  include DataMapper::Resource
-  property :id,                 Serial
-  property :name, String  
-  property :rank,      Integer  
-  property :date, Date
-  property :points, Integer
-  property :type, String
-end
+  class JensRank
+    include DataMapper::Resource
+    property :id,                 Serial
+    property :name, String  
+    property :rank,      Integer  
+    property :date, Date
+    property :points, Integer
+    property :type, String
+  end
 
 DataMapper.auto_upgrade!
 get '/' do
@@ -105,7 +106,8 @@ def get_rank_from_8a(url,type, chart_id)
     rows.each do |row|
       if (row.at_xpath("td[1]") and row.at_xpath("td[5]") and row.at_xpath("td[1]").text.to_i < 21)
         puts row.at_xpath("td[1]").text + " : "+ row.at_xpath("td[5]").text + " : "+ row.at_xpath("td[3]").text
-        JensRank.create(type: type, name: row.at_xpath("td[5]").text, rank: row.at_xpath("td[1]").text, date: Date.today, points: row.at_xpath("td[3]").text.gsub(/\p{^Alnum}/, '').to_i)
+        rank = row.at_xpath("td[1]").text.to_i
+        JensRank.create(type: type, name: row.at_xpath("td[5]").text, rank: rank, date: Date.today, points: row.at_xpath("td[3]").text.gsub(/\p{^Alnum}/, '').to_i)
       end
     end
   end

@@ -57,8 +57,8 @@ window.LineGraph.prototype.draw = function(){
         d3.max(jensCounts, function(c) { return d3.max(c.values, function(v) { return v[config.yDataPoint]; }); })
     ]);
 
-    var color = d3.scale.category10()
-        .domain(d3.keys(data[0]).filter(function(key) { return key === config.name; }));
+    var color = d3.scale.category20()
+        .domain(d3.keys(data[data.length - 1 ]).filter(function(key) { return key === config.name; }));
     var line = d3.svg.line()
         .x(function(d) { return x(d[config.xDataPoint]); })
         .y(function(d) { return y(d[config.yDataPoint]); });
@@ -68,22 +68,41 @@ window.LineGraph.prototype.draw = function(){
         .enter().append("g")
         .attr("class", "jens-count");
     var totalLength = config.offset;
-    var namesShown;
+    //var namesShown;
     var showNames = function(){
-        if(!namesShown){
+        //if(!namesShown){
         jensCount.append("text")
-        .datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
-        .attr("transform", function(d) { 
-            return "translate(" + x(d.value[config.xDataPoint]) + "," + y(d.value[config.yDataPoint]) + ")"; })
-        .attr("x", 3)
-        .attr("dy", ".35em")
-        .text(function(d) { return d.value[config.name]; });
-        namesShown = true;
-        }
+            .datum(function(d) { return {name: d.key, value: d.values[d.values.length - 1]}; })
+            .attr("transform", function(d) { 
+                return "translate(" + x(d.value[config.xDataPoint]) + "," + y(d.value[config.yDataPoint]) + ")"; })
+            .attr("x", 3)
+            .attr("dy", ".35em")
+            .text(function(d) { 
+                if(d.value && d.value.rank ){ 
+
+                    var label;  
+                    var today = new Date();
+                    var yesterday = today.setDate(today.getDate() - 1);
+
+                    d.value.date > yesterday ?  label = d.value[config.name] : label = ""
+                    return label;
+                }
+                else if (d.value && d.value.rank === 0){
+                    return "";
+                }
+                else if (d.value[config.name] === 'Joe Meiners'){
+
+                    return d.value[config.name]; 
+                }
+
+        });
+        //namesShown = true;
+        //}
     }
     jensCount.append("path")
         .attr("class", "line")
         .attr("d", function(d) {
+      
          return line(d.values); })
         .attr("stroke-dasharray", totalLength + " " + totalLength)
         .attr("stroke-dashoffset", totalLength)
@@ -104,7 +123,9 @@ window.LineGraph.prototype.draw = function(){
         .duration(2000)
         .ease("linear")
         .attr("stroke-dashoffset", 0)
-        .style("stroke", function(d) { return color(d.key); })
+        .style("stroke", function(d) { 
+
+            return color(d.key); })
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate("+0+"," + height + ")")
@@ -159,7 +180,7 @@ $(document).ready(function(){
                 yDataPoint:"rank",
                 name: "name",
                 title: "United States Boulder Rankings",
-                offset: 1000
+                offset: 2000
             }
             rankGraph = new window.LineGraph(config);
             rankGraph.draw();
@@ -182,7 +203,7 @@ $(document).ready(function(){
                 yDataPoint:"rank",
                 name: "name",
                 title: "United States Route Rankings",
-                offset: 1000
+                offset: 2000
             }
             rankGraph = new window.LineGraph(config);
             rankGraph.draw();
